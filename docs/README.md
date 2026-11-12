@@ -1,6 +1,6 @@
 # Chao-Yi Wang 作品集網站
 
-從 Wix 網站搬出來的靜態版本，網址結構和原網站相同（例如 `/wine`、`/graphic-design/nymphia`），舊連結搬家後仍然有效。原本 About 頁的網址是 `/home`，現在改成 `/about`，`/home` 會自動轉過去。
+從 Wix 網站搬出來的靜態版本，網址結構和原網站相同（例如 `/wine`、`/graphic-design/nymphia`），舊連結搬家後仍然有效。原本 About 頁的網址是 `/home`，現在改成 `/about`，`/home` 會自動轉過去。Contact 頁已移除。
 
 ## 在電腦上預覽
 
@@ -13,25 +13,15 @@
 3. 到 **Settings → Pages**，Source 選 **Deploy from a branch**，Branch 選 **main**、資料夾選 **/ (root)**，按 **Save**。
 4. 一到兩分鐘後，網址會出現在同一頁上方：`https://你的帳號.github.io/portfolio-preview/`
 
-## 還需要補的圖片（29 張）
+## 動畫與圖層
 
-HAR 檔只記錄到看過的圖片，以下位置目前顯示灰色的「圖片待補」框。把原始圖片改成對應的檔名，放進 `img/` 裡相同的資料夾就會自動出現，不需要改程式碼。
+和原網站設定相同：
 
-| 頁面 | 資料夾 | 缺少的檔案 |
-|---|---|---|
-| Gua Sha | `img/gua-sha/` | 輪播第 3～6 張：slide-03.jpg ～ slide-06.jpg |
-| Vibrator（Me Time） | `img/me-time/` | 輪播第 5～9 張：slide-05.jpg ～ slide-09.jpg |
-| Fragrance（alluria） | `img/alluria-fragrance/` | 輪播第 4～7 張：slide-04.jpg ～ slide-07.jpg |
-| Herbal Tea | `img/mofa-herbal-tea/` | 由上往下第 4、5 張：04.jpg、05.jpg |
-| Tampons & Pads | `img/menstrualproducts/` | 由上往下第 6～8 張：06.jpg ～ 08.jpg |
-| Drag Show | `img/gd-929-drag-show/` | 03、04、06、07、08、09.jpg |
-| Wedding Invite | `img/gd-weddinginvite/` | 04、05、06.jpg |
-| Taiwan Pride | `img/gd-taiwanpride/` | 07.jpg |
-| Consciousness Poster | `img/gd-consciousness-poster/` | 04.jpg |
-
-圖片建議寬度 2000px 以內、每張 1MB 以下（可用 squoosh.app 壓縮），網站會快很多。
-
-**Cosmetic 頁**（`inii-cosmetic/index.html`）沒有取得內容，目前只有標題、基本資料和封面圖。說明文字請貼在檔案裡標有 `TODO` 的位置。
+- 換頁時舊頁淡出、新頁淡入（各 0.35 秒）。Chrome、Edge、Safari 使用瀏覽器內建的換頁動畫；Firefox 用 JavaScript 模擬。
+- 名字標誌與選單在第一次進站時從右側浮入。
+- 作品頁的標題、說明、Client／Category／Year 從右側浮入；首頁的展開圖、About 的照片從下方浮入。
+- 名字標誌、選單、作品頁左側文字、Next Project 按鈕、版權文字都固定在畫面上，只有作品圖片會捲動，並從這些固定圖層的下方經過。
+- 如果使用者在系統設定中開啟「減少動態效果」，所有動畫都會自動關閉。
 
 ## 修改內容
 
@@ -42,11 +32,6 @@ HAR 檔只記錄到看過的圖片，以下位置目前顯示灰色的「圖片�
 ## 字體
 
 原網站使用 Domaine Display（標題）和 Neuzeit S（內文），這兩套是商業字體，Wix 的授權不會跟著搬過來，所以目前用免費的 Newsreader 和 Jost 替代。如果你有網頁授權，把 woff2 字體檔放進 `fonts/` 資料夾，再依照 `css/style.css` 最上方的註解啟用即可。
-
-## 聯絡表單
-
-1. 到 https://formspree.io 免費註冊並建立表單，會拿到一串代碼（例如 `xyzabcd`）。
-2. 把 `contact/index.html` 裡的 `YOUR_FORM_ID` 換成這串代碼。
 
 ## 正式上線（私人儲存庫 + Cloudflare Pages）
 

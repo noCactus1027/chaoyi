@@ -1,3 +1,30 @@
+// ===== 進場浮出動畫：元素進入畫面時播放一次 =====
+(() => {
+  const els = document.querySelectorAll('[data-anim]');
+  const reveal = el => el.classList.add('in');
+  if (!('IntersectionObserver' in window)) { els.forEach(reveal); return; }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { reveal(e.target); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  els.forEach(el => io.observe(el));
+})();
+
+// ===== 換頁淡入淡出（瀏覽器不支援 View Transitions 時的替代做法） =====
+if (!('onpagereveal' in window)) {
+  document.documentElement.classList.add('no-vt');
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href]');
+    if (!a || a.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+    const url = new URL(a.href, location.href);
+    if (url.origin !== location.origin || url.href === location.href) return;
+    e.preventDefault();
+    document.body.classList.add('leaving');
+    setTimeout(() => { location.href = url.href; }, 350);
+  });
+  // 從上一頁返回時，避免畫面停在淡出狀態
+  window.addEventListener('pageshow', () => document.body.classList.remove('leaving'));
+}
+
 // ===== 展開圖：滑到盒面時顯示作品圖 =====
 document.querySelectorAll('.dieline .face').forEach(face => {
   const href = face.getAttribute('href');
@@ -72,24 +99,3 @@ document.addEventListener('keydown', e => {
     if (e.key === 'ArrowRight') lbShow(lbIndex + 1);
   }
 });
-
-// ===== 聯絡表單（Formspree） =====
-const form = document.querySelector('.contact-form');
-if (form) {
-  const status = form.querySelector('.form-status');
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    if (form.action.includes('YOUR_FORM_ID')) {
-      status.textContent = 'The form isn’t connected yet. Add your Formspree form ID in contact/index.html.';
-      return;
-    }
-    status.textContent = 'Sending…';
-    try {
-      const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
-      if (res.ok) { form.reset(); status.textContent = 'Thanks!'; }
-      else status.textContent = 'Your message wasn’t sent. Please try again, or email me directly.';
-    } catch {
-      status.textContent = 'Couldn’t connect. Check your internet connection and submit again.';
-    }
-  });
-}

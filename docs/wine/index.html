@@ -9,18 +9,24 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400&family=Newsreader:opsz,wght@6..72,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
+<script>
+  // 進場動畫：先把要浮出的元素藏起來，避免閃一下
+  document.documentElement.classList.add('anim');
+  // 頁首浮出只在第一次進站時播放（同原網站）
+  try { if (!sessionStorage.getItem('cw-intro')) { document.documentElement.classList.add('intro'); sessionStorage.setItem('cw-intro', '1'); } } catch (e) {}
+</script>
 </head>
 <body>
 <div class="frame">
 <header class="site-header">
   <a class="logo" href="../index.html"><img src="../img/logo.avif" alt="Chao-Yi Wang 王昭怡"></a>
-  <nav class="nav"><a href="../index.html" aria-current="page">Package Design</a><a href="../graphic-design/index.html">Graphic Design</a><a href="../about/index.html">About</a><a href="../contact/index.html">Contact</a></nav>
+  <nav class="nav"><a href="../index.html" aria-current="page">Package Design</a><a href="../graphic-design/index.html">Graphic Design</a><a href="../about/index.html">About</a></nav>
 </header>
 <main class="project">
   <aside class="project-info">
-    <h1>Wine <small>/ Flavor Visualization /</small></h1>
-    <p>The design utilized blind embossed streamlines pouring down from the name of the wines to the Public Goods slogan “it’s all good”, hinting that the ingredients of our products can’t always be seen, but it’s all there, all good.<br>Each unique shape of waves symbolizes the senses you feel from that very first sip of these exquisite flavors. The classic black and white color palette not only communicates the minimal and elegant visual of Public Goods, but stands out from the color competitive world of wine labels. This design is not solely geared to online subscribers, but to people looking, touching and feeling out a gift for their loved ones, themselves, or clients at a liquor store.<br>This is a concept project.</p>
-    <dl class="meta"><div><dt>Client /</dt><dd>Public Goods</dd></div><div><dt>Category /</dt><dd>Package Design</dd></div><div><dt>Year /</dt><dd>2021 - 2022</dd></div></dl>
+    <h1 data-anim="right">Wine <small>/ Flavor Visualization /</small></h1>
+    <div class="desc" data-anim="right"><p>The design utilized blind embossed streamlines pouring down from the name of the wines to the Public Goods slogan “it’s all good”, hinting that the ingredients of our products can’t always be seen, but it’s all there, all good.<br>Each unique shape of waves symbolizes the senses you feel from that very first sip of these exquisite flavors. The classic black and white color palette not only communicates the minimal and elegant visual of Public Goods, but stands out from the color competitive world of wine labels. This design is not solely geared to online subscribers, but to people looking, touching and feeling out a gift for their loved ones, themselves, or clients at a liquor store.<br>This is a concept project.</p></div>
+    <dl class="meta"><div data-anim="right"><dt>Client /</dt><dd>Public Goods</dd></div><div data-anim="right"><dt>Category /</dt><dd>Package Design</dd></div><div data-anim="right"><dt>Year /</dt><dd>2021 - 2022</dd></div></dl>
   </aside>
   <section class="project-media">
     <div class="slideshow" data-count="9">

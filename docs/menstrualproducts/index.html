@@ -9,18 +9,24 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400&family=Newsreader:opsz,wght@6..72,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
+<script>
+  // 進場動畫：先把要浮出的元素藏起來，避免閃一下
+  document.documentElement.classList.add('anim');
+  // 頁首浮出只在第一次進站時播放（同原網站）
+  try { if (!sessionStorage.getItem('cw-intro')) { document.documentElement.classList.add('intro'); sessionStorage.setItem('cw-intro', '1'); } } catch (e) {}
+</script>
 </head>
 <body>
 <div class="frame">
 <header class="site-header">
   <a class="logo" href="../index.html"><img src="../img/logo.avif" alt="Chao-Yi Wang 王昭怡"></a>
-  <nav class="nav"><a href="../index.html" aria-current="page">Package Design</a><a href="../graphic-design/index.html">Graphic Design</a><a href="../about/index.html">About</a><a href="../contact/index.html">Contact</a></nav>
+  <nav class="nav"><a href="../index.html" aria-current="page">Package Design</a><a href="../graphic-design/index.html">Graphic Design</a><a href="../about/index.html">About</a></nav>
 </header>
 <main class="project">
   <aside class="project-info">
-    <h1>Tampons &amp; Pads <small>Tampons &amp; Pads / Menstrual Pro ducts /</small></h1>
-    <p>This rectangular box appears to be simple and basic. It is actually capable of dividing and dispensing two different absorbencies of tampons as desired. The outer box contains two separate tear-strip openings for two absorbencies, one located on the bottom of the front panel while the other is on the top of the back panel. A separated paper structure is designed to fit into the outer box to gravity dispense desired flow while cease dispensing the other. Simply flip the package upside down, front side back to dispense the other absorbency of tampons</p>
-    <dl class="meta"><div><dt>Client /</dt><dd>Public Goods</dd></div><div><dt>Category /</dt><dd>Structural<br>Package Design</dd></div><div><dt>Year /</dt><dd>2023</dd></div></dl>
+    <h1 data-anim="right">Tampons &amp; Pads <small>Tampons &amp; Pads / Menstrual Pro ducts /</small></h1>
+    <div class="desc" data-anim="right"><p>This rectangular box appears to be simple and basic. It is actually capable of dividing and dispensing two different absorbencies of tampons as desired. The outer box contains two separate tear-strip openings for two absorbencies, one located on the bottom of the front panel while the other is on the top of the back panel. A separated paper structure is designed to fit into the outer box to gravity dispense desired flow while cease dispensing the other. Simply flip the package upside down, front side back to dispense the other absorbency of tampons</p></div>
+    <dl class="meta"><div data-anim="right"><dt>Client /</dt><dd>Public Goods</dd></div><div data-anim="right"><dt>Category /</dt><dd>Structural<br>Package Design</dd></div><div data-anim="right"><dt>Year /</dt><dd>2023</dd></div></dl>
   </aside>
   <section class="project-media">
     <figure class="shot" style="width:61.87%;margin-left:10.09%"><img src="../img/menstrualproducts/01.avif" alt="Tampons &amp; Pads" loading="lazy" style="aspect-ratio:662/472" onerror="this.classList.add('is-missing')"></figure>
@@ -28,9 +34,9 @@
 <figure class="shot" style="width:61.87%;margin-left:10.09%"><img src="../img/menstrualproducts/03.avif" alt="Tampons &amp; Pads" loading="lazy" style="aspect-ratio:662/371" onerror="this.classList.add('is-missing')"></figure>
 <figure class="shot" style="width:61.87%;margin-left:10.09%"><img src="../img/menstrualproducts/04.avif" alt="Tampons &amp; Pads" loading="lazy" style="aspect-ratio:662/371" onerror="this.classList.add('is-missing')"></figure>
 <figure class="shot" style="width:61.87%;margin-left:10.09%"><img src="../img/menstrualproducts/05.avif" alt="Tampons &amp; Pads" loading="lazy" style="aspect-ratio:662/371" onerror="this.classList.add('is-missing')"></figure>
-<figure class="shot" style="width:61.87%;margin-left:10.09%"><img src="../img/menstrualproducts/06.jpg" alt="Tampons &amp; Pads" loading="lazy" style="aspect-ratio:662/371" data-missing="img/menstrualproducts/06.jpg" onerror="this.classList.add('is-missing')"></figure>
-<figure class="shot" style="width:61.87%;margin-left:10.09%"><img src="../img/menstrualproducts/07.jpg" alt="Tampons &amp; Pads" loading="lazy" style="aspect-ratio:662/371" data-missing="img/menstrualproducts/07.jpg" onerror="this.classList.add('is-missing')"></figure>
-<figure class="shot" style="width:61.87%;margin-left:10.09%"><img src="../img/menstrualproducts/08.jpg" alt="Tampons &amp; Pads" loading="lazy" style="aspect-ratio:662/370" data-missing="img/menstrualproducts/08.jpg" onerror="this.classList.add('is-missing')"></figure>
+<figure class="shot" style="width:61.87%;margin-left:10.09%"><img src="../img/menstrualproducts/06.avif" alt="Tampons &amp; Pads" loading="lazy" style="aspect-ratio:662/371" onerror="this.classList.add('is-missing')"></figure>
+<figure class="shot" style="width:61.87%;margin-left:10.09%"><img src="../img/menstrualproducts/07.avif" alt="Tampons &amp; Pads" loading="lazy" style="aspect-ratio:662/371" onerror="this.classList.add('is-missing')"></figure>
+<figure class="shot" style="width:61.87%;margin-left:10.09%"><img src="../img/menstrualproducts/08.avif" alt="Tampons &amp; Pads" loading="lazy" style="aspect-ratio:662/370" onerror="this.classList.add('is-missing')"></figure>
     <a class="next" href="../alluria-fragrance/index.html">Next Project &gt;</a>
   </section>
 </main>

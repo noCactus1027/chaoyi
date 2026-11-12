@@ -9,26 +9,32 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400&family=Newsreader:opsz,wght@6..72,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../css/style.css">
+<script>
+  // 進場動畫：先把要浮出的元素藏起來，避免閃一下
+  document.documentElement.classList.add('anim');
+  // 頁首浮出只在第一次進站時播放（同原網站）
+  try { if (!sessionStorage.getItem('cw-intro')) { document.documentElement.classList.add('intro'); sessionStorage.setItem('cw-intro', '1'); } } catch (e) {}
+</script>
 </head>
 <body>
 <div class="frame">
 <header class="site-header">
   <a class="logo" href="../../index.html"><img src="../../img/logo.avif" alt="Chao-Yi Wang 王昭怡"></a>
-  <nav class="nav"><a href="../../index.html">Package Design</a><a href="../../graphic-design/index.html" aria-current="page">Graphic Design</a><a href="../../about/index.html">About</a><a href="../../contact/index.html">Contact</a></nav>
+  <nav class="nav"><a href="../../index.html">Package Design</a><a href="../../graphic-design/index.html" aria-current="page">Graphic Design</a><a href="../../about/index.html">About</a></nav>
 </header>
 <main class="project">
   <aside class="project-info">
-    <h1>Wedding Invite <small>/ Graphic Design /</small></h1>
-    <p>I designed this wedding invitation for my friend.<br>The background is made from a mix of their photo.</p>
-    <dl class="meta"><div><dt>Client /</dt><dd>Giles Hsu</dd></div><div><dt>Category /</dt><dd>Graphic Design</dd></div><div><dt>Year /</dt><dd>2023</dd></div></dl>
+    <h1 data-anim="right">Wedding Invite <small>/ Graphic Design /</small></h1>
+    <div class="desc" data-anim="right"><p>I designed this wedding invitation for my friend.<br>The background is made from a mix of their photo.</p></div>
+    <dl class="meta"><div data-anim="right"><dt>Client /</dt><dd>Giles Hsu</dd></div><div data-anim="right"><dt>Category /</dt><dd>Graphic Design</dd></div><div data-anim="right"><dt>Year /</dt><dd>2023</dd></div></dl>
   </aside>
   <section class="project-media">
     <figure class="shot" style="width:51.12%;margin-left:1.40%"><img src="../../img/gd-weddinginvite/01.avif" alt="Wedding Invite" loading="lazy" style="aspect-ratio:547/439" onerror="this.classList.add('is-missing')"></figure>
 <figure class="shot" style="width:33.08%;margin-left:38.88%"><img src="../../img/gd-weddinginvite/02.avif" alt="Wedding Invite" loading="lazy" style="aspect-ratio:354/728" onerror="this.classList.add('is-missing')"></figure>
 <figure class="shot" style="width:65.89%;margin-left:2.15%"><img src="../../img/gd-weddinginvite/03.avif" alt="Wedding Invite" loading="lazy" style="aspect-ratio:705/397" onerror="this.classList.add('is-missing')"></figure>
-<figure class="shot" style="width:43.74%;margin-left:2.15%"><img src="../../img/gd-weddinginvite/04.jpg" alt="Wedding Invite" loading="lazy" style="aspect-ratio:468/832" data-missing="img/gd-weddinginvite/04.jpg" onerror="this.classList.add('is-missing')"></figure>
-<figure class="shot" style="width:43.74%;margin-left:24.30%"><img src="../../img/gd-weddinginvite/05.jpg" alt="Wedding Invite" loading="lazy" style="aspect-ratio:468/832" data-missing="img/gd-weddinginvite/05.jpg" onerror="this.classList.add('is-missing')"></figure>
-<figure class="shot" style="width:65.89%;margin-left:2.15%"><img src="../../img/gd-weddinginvite/06.jpg" alt="Wedding Invite" loading="lazy" style="aspect-ratio:705/469" data-missing="img/gd-weddinginvite/06.jpg" onerror="this.classList.add('is-missing')"></figure>
+<figure class="shot" style="width:43.74%;margin-left:2.15%"><img src="../../img/gd-weddinginvite/04.avif" alt="Wedding Invite" loading="lazy" style="aspect-ratio:468/832" onerror="this.classList.add('is-missing')"></figure>
+<figure class="shot" style="width:43.74%;margin-left:24.30%"><img src="../../img/gd-weddinginvite/05.avif" alt="Wedding Invite" loading="lazy" style="aspect-ratio:468/832" onerror="this.classList.add('is-missing')"></figure>
+<figure class="shot" style="width:65.89%;margin-left:2.15%"><img src="../../img/gd-weddinginvite/06.avif" alt="Wedding Invite" loading="lazy" style="aspect-ratio:705/469" onerror="this.classList.add('is-missing')"></figure>
     <a class="next" href="../../graphic-design/taiwanpride/index.html">Next Project &gt;</a>
   </section>
 </main>

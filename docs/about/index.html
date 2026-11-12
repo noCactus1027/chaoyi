@@ -9,21 +9,27 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400&family=Newsreader:opsz,wght@6..72,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
+<script>
+  // 進場動畫：先把要浮出的元素藏起來，避免閃一下
+  document.documentElement.classList.add('anim');
+  // 頁首浮出只在第一次進站時播放（同原網站）
+  try { if (!sessionStorage.getItem('cw-intro')) { document.documentElement.classList.add('intro'); sessionStorage.setItem('cw-intro', '1'); } } catch (e) {}
+</script>
 </head>
 <body>
 <div class="frame">
 <header class="site-header">
   <a class="logo" href="../index.html"><img src="../img/logo.avif" alt="Chao-Yi Wang 王昭怡"></a>
-  <nav class="nav"><a href="../index.html">Package Design</a><a href="../graphic-design/index.html">Graphic Design</a><a href="../about/index.html" aria-current="page">About</a><a href="../contact/index.html">Contact</a></nav>
+  <nav class="nav"><a href="../index.html">Package Design</a><a href="../graphic-design/index.html">Graphic Design</a><a href="../about/index.html" aria-current="page">About</a></nav>
 </header>
 <main class="about">
   <div class="about-text">
-    <h1>About</h1>
-    <p>My name is Chao-Yi Wang, 王昭怡. I moved to the United States from Taiwan and graduated from Pratt Institute, in New York City, with a Masters in Package Design. I currently work as a Package Designer in New York City.<br>
+    <h1 data-anim="right">About</h1>
+    <div class="desc" data-anim="right"><p>My name is Chao-Yi Wang, 王昭怡. I moved to the United States from Taiwan and graduated from Pratt Institute, in New York City, with a Masters in Package Design. I currently work as a Package Designer in New York City.<br>
 Package design requires a balance of efficiency, user consideration, and form. I am passionate about these aspects of packaging and believe that it can have lasting effects on users and sales. In my designs, I try to strike a balance between all three.<br>
-On a personal note, I consider sustainability to be an important factor in packaging and package design. It is an aspect of the field that I hope to increasingly incorporate as I continue my work.</p>
+On a personal note, I consider sustainability to be an important factor in packaging and package design. It is an aspect of the field that I hope to increasingly incorporate as I continue my work.</p></div>
   </div>
-  <figure class="about-image"><img src="../img/about/portrait.avif" alt="Chao-Yi Wang" style="aspect-ratio:902/722" onerror="this.classList.add('is-missing')"></figure>
+  <figure class="about-image" data-anim="bottom"><img src="../img/about/portrait.avif" alt="Chao-Yi Wang" style="aspect-ratio:902/722" onerror="this.classList.add('is-missing')"></figure>
 </main>
 <footer class="site-footer"><p class="copyright">© 2022 by Chao-Yi Wang.</p></footer>
 </div>
