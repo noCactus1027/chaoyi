@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- ✏️ 網站標題與描述（會顯示在 Google 搜尋結果和瀏覽器分頁） -->
+  <title>Chaoyi Wang｜作品集</title>
+  <meta name="description" content="Chaoyi Wang 的個人作品集。">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◐</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="logo" href="#top">Chaoyi Wang</a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="nav">選單</button>
+    <nav id="nav" class="nav">
+      <a href="#works">作品</a>
+      <a href="#about">關於我</a>
+      <a href="#experience">經歷</a>
+      <a href="#contact">聯絡</a>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- 首頁主視覺 -->
+    <section class="hero">
+      <div class="hero-text">
+        <!-- ✏️ 你的名字與一句話介紹 -->
+        <h1>你的中文名字<span class="en">Chaoyi Wang</span></h1>
+        <p class="tagline">在這裡寫一句話介紹你的創作方向，例如：以影像與平面設計記錄日常裡的光。</p>
+        <a class="button" href="#works">看作品</a>
+      </div>
+      <figure class="hero-image">
+        <!-- ✏️ 換成你的代表作品：把圖片放進 images 資料夾，修改 src -->
+        <img src="images/hero.svg" alt="代表作品">
+      </figure>
+    </section>
+
+    <!-- 作品集：作品清單在 js/main.js 最上方修改 -->
+    <section id="works" class="section">
+      <div class="section-head">
+        <h2>作品</h2>
+        <div class="filters" role="group" aria-label="作品分類"></div>
+      </div>
+      <div class="gallery" id="gallery"></div>
+    </section>
+
+    <!-- 關於我 -->
+    <section id="about" class="section about">
+      <figure class="portrait">
+        <!-- ✏️ 換成你的照片 -->
+        <img src="images/portrait.svg" alt="Chaoyi Wang 的照片">
+      </figure>
+      <div class="about-text">
+        <h2>關於我</h2>
+        <!-- ✏️ 把 Wix「關於我」的文字貼在這裡，每段用一組 <p></p> -->
+        <p>這裡放你的自我介紹。可以寫你是誰、在哪裡工作或生活、主要創作的媒材和題材。</p>
+        <p>第二段可以寫你的創作理念，或你最在意作品帶給人什麼感受。</p>
+      </div>
+    </section>
+
+    <!-- 經歷 -->
+    <section id="experience" class="section">
+      <h2>經歷</h2>
+      <!-- ✏️ 每一列是一筆經歷，複製 <li>...</li> 就能新增 -->
+      <ul class="timeline">
+        <li><span class="year">2025</span><div><strong>展覽或專案名稱</strong><p>地點或單位，簡短說明</p></div></li>
+        <li><span class="year">2024</span><div><strong>得獎或合作案名稱</strong><p>地點或單位，簡短說明</p></div></li>
+        <li><span class="year">2022</span><div><strong>學歷或工作經歷</strong><p>學校／公司名稱</p></div></li>
+      </ul>
+    </section>
+
+    <!-- 聯絡 -->
+    <section id="contact" class="section contact">
+      <div>
+        <h2>聯絡</h2>
+        <p>歡迎合作邀約或任何問題，填寫表單或直接寄信給我。</p>
+        <!-- ✏️ 你的 Email 與社群連結 -->
+        <p class="contact-links">
+          <a href="mailto:hello@chaoyiwang.com">hello@chaoyiwang.com</a><br>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+        </p>
+      </div>
+      <!-- ✏️ 表單：到 formspree.io 免費註冊，把下面的 YOUR_FORM_ID 換成你的表單代碼 -->
+      <form class="form" id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <label>姓名<input type="text" name="name" required autocomplete="name"></label>
+        <label>Email<input type="email" name="email" required autocomplete="email"></label>
+        <label>訊息<textarea name="message" rows="5" required></textarea></label>
+        <button class="button" type="submit">送出訊息</button>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Chaoyi Wang. All rights reserved.</p>
+  </footer>
+
+  <!-- 作品放大檢視 -->
+  <dialog class="lightbox" id="lightbox" aria-label="作品放大檢視">
+    <button class="lb-close" aria-label="關閉">✕</button>
+    <button class="lb-prev" aria-label="上一張">‹</button>
+    <figure>
+      <img id="lb-img" src="" alt="">
+      <figcaption id="lb-caption"></figcaption>
+    </figure>
+    <button class="lb-next" aria-label="下一張">›</button>
+  </dialog>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
