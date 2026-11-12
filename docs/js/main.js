@@ -61,6 +61,18 @@ if (toggle) {
   window.addEventListener('pageshow', () => setOpen(false));
 }
 
+// ===== 影片：聲音開關、缺檔提示 =====
+document.querySelectorAll('.shot-video').forEach(fig => {
+  const v = fig.querySelector('video');
+  fig.dataset.missing = v.dataset.file;
+  const btn = fig.querySelector('.sound');
+  if (btn) btn.addEventListener('click', () => {
+    v.muted = !v.muted;
+    btn.setAttribute('aria-pressed', !v.muted);
+    btn.setAttribute('aria-label', v.muted ? 'Turn sound on' : 'Turn sound off');
+  });
+});
+
 // ===== 放大檢視 =====
 const lb = document.querySelector('.lightbox');
 const lbImg = lb.querySelector('img');

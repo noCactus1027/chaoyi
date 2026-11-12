@@ -27,6 +27,18 @@
 
 螢幕寬度 820px 以下會切換成手機版，照原網站的手機版排版：以 320px 寬設計再等比放大，名字標誌在左上、右上角是固定的選單按鈕（點開是白色全螢幕選單）。首頁和 Graphic Design 改成作品封面一張張往下排，作品頁是文字在上、圖片在下，輪播改成兩欄小圖（點圖可放大），About 只顯示文字。手機版的作品排列順序可以在 `build` 用的 `MOBILE_ORDER` 中調整；直接改 HTML 的話，順序在 `index.html` 與 `graphic-design/index.html` 的 `tile-grid` 區塊裡。
 
+## 影片
+
+原網站有 4 支影片。Wedding Invite 的影片已經放好；另外 3 支沒能從掃描紀錄取得，請從 Wix 媒體管理員下載後，改成下表的檔名放進對應資料夾，網頁就會自動播放，不需要改程式碼。放進來之前，自動播放的影片會先顯示封面圖，Gua Sha 的影片位置會顯示「影片待補」。
+
+| 頁面 | 放置位置與檔名 | 說明 |
+|---|---|---|
+| Drag Show | `video/gd-929-drag-show/new-years-eve.mp4` | New Year’s Eve Drag Show 海報動畫，自動循環播放 |
+| Taiwan Pride | `video/gd-taiwanpride/reel.mp4` | Instagram Reel，自動循環播放 |
+| Gua Sha | `video/gua-sha/product-video.mp4` | 產品影片，按播放鍵才播放 |
+
+自動播放的影片預設靜音（瀏覽器規定），右下角有聲音開關。
+
 ## 修改內容
 
 - 文字：直接打開各頁的 `index.html`，用文字編輯器（推薦 VS Code）修改。
