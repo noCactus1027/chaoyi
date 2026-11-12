@@ -14,6 +14,7 @@
   document.documentElement.classList.add('anim');
   // 頁首浮出只在第一次進站時播放（同原網站）
   try { if (!sessionStorage.getItem('cw-intro')) { document.documentElement.classList.add('intro'); sessionStorage.setItem('cw-intro', '1'); } } catch (e) {}
+  document.documentElement.classList.add('intro-logo');
 </script>
 </head>
 <body>
@@ -21,7 +22,9 @@
 <header class="site-header">
   <a class="logo" href="index.html"><img src="img/logo.avif" alt="Chao-Yi Wang 王昭怡"></a>
   <nav class="nav"><a href="index.html" aria-current="page">Package Design</a><a href="graphic-design/index.html">Graphic Design</a><a href="about/index.html">About</a></nav>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span></span><span></span><span></span></button>
 </header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Menu"><a href="index.html" aria-current="page">Package Design</a><a href="graphic-design/index.html">Graphic Design</a><a href="about/index.html">About</a></nav>
 <main class="dieline" style="aspect-ratio:1440/1818">
 <img class="dieline-bg" data-anim="bottom" src="img/dieline/package-design.avif" alt="" style="left:-4.653%;top:14.136%;width:109.306%;height:83.663%">
 <a class="face" href="wine/index.html" style="left:27.778%;top:26.678%;width:14.792%;height:11.771%" aria-label="Wine"></a><span class="face-label" data-anim="bottom" style="left:31.181%;top:31.408%;width:7.986%;height:2.145%">Wine</span><a class="face-preview" href="wine/index.html" tabindex="-1" style="left:42.708%;top:26.788%;width:29.444%;height:23.322%"><img src="img/tiles/wine.avif" alt="Wine" onerror="this.classList.add('is-missing')"></a>
@@ -35,15 +38,15 @@
 <a class="face" href="alluria-fragrance/index.html" style="left:42.569%;top:50.110%;width:14.792%;height:11.771%" aria-label="Fragrance"></a><span class="face-label" data-anim="bottom" style="left:44.931%;top:54.895%;width:10.069%;height:2.145%">Fragrance</span><a class="face-preview" href="alluria-fragrance/index.html" tabindex="-1" style="left:57.500%;top:50.110%;width:29.583%;height:23.432%"><img src="img/tiles/alluria-fragrance.webp" alt="Fragrance" onerror="this.classList.add('is-missing')"></a>
 </main>
 <main class="tile-grid">
-<a class="tile" data-anim="bottom" href="wine/index.html"><img src="img/tiles/wine.avif" alt="Wine" loading="lazy" onerror="this.classList.add('is-missing')"></a>
 <a class="tile" data-anim="bottom" href="gua-sha/index.html"><img src="img/tiles/gua-sha.avif" alt="Gua Sha" loading="lazy" onerror="this.classList.add('is-missing')"></a>
-<a class="tile" data-anim="bottom" href="fermin-beer/index.html"><img src="img/tiles/fermin-beer.webp" alt="Craft Beer" loading="lazy" onerror="this.classList.add('is-missing')"></a>
-<a class="tile" data-anim="bottom" href="kali-tampon/index.html"><img src="img/tiles/kali-tampon.avif" alt="Tampon" loading="lazy" onerror="this.classList.add('is-missing')"></a>
-<a class="tile" data-anim="bottom" href="inii-cosmetic/index.html"><img src="img/tiles/inii-cosmetic.webp" alt="Cosmetic" loading="lazy" onerror="this.classList.add('is-missing')"></a>
-<a class="tile" data-anim="bottom" href="me-time/index.html"><img src="img/tiles/me-time.avif" alt="Vibrator" loading="lazy" onerror="this.classList.add('is-missing')"></a>
-<a class="tile" data-anim="bottom" href="mofa-herbal-tea/index.html"><img src="img/tiles/mofa-herbal-tea.avif" alt="Herbal Tea" loading="lazy" onerror="this.classList.add('is-missing')"></a>
 <a class="tile" data-anim="bottom" href="menstrualproducts/index.html"><img src="img/tiles/menstrualproducts.avif" alt="Tampons &amp; Pads" loading="lazy" onerror="this.classList.add('is-missing')"></a>
+<a class="tile" data-anim="bottom" href="wine/index.html"><img src="img/tiles/wine.avif" alt="Wine" loading="lazy" onerror="this.classList.add('is-missing')"></a>
+<a class="tile" data-anim="bottom" href="mofa-herbal-tea/index.html"><img src="img/tiles/mofa-herbal-tea.avif" alt="Herbal Tea" loading="lazy" onerror="this.classList.add('is-missing')"></a>
+<a class="tile" data-anim="bottom" href="me-time/index.html"><img src="img/tiles/me-time.avif" alt="Vibrator" loading="lazy" onerror="this.classList.add('is-missing')"></a>
+<a class="tile" data-anim="bottom" href="kali-tampon/index.html"><img src="img/tiles/kali-tampon.avif" alt="Tampon" loading="lazy" onerror="this.classList.add('is-missing')"></a>
 <a class="tile" data-anim="bottom" href="alluria-fragrance/index.html"><img src="img/tiles/alluria-fragrance.webp" alt="Fragrance" loading="lazy" onerror="this.classList.add('is-missing')"></a>
+<a class="tile" data-anim="bottom" href="fermin-beer/index.html"><img src="img/tiles/fermin-beer.webp" alt="Craft Beer" loading="lazy" onerror="this.classList.add('is-missing')"></a>
+<a class="tile" data-anim="bottom" href="inii-cosmetic/index.html"><img src="img/tiles/inii-cosmetic.webp" alt="Cosmetic" loading="lazy" onerror="this.classList.add('is-missing')"></a>
 </main>
 <footer class="site-footer"><p class="copyright">© 2022 by Chao-Yi Wang.</p></footer>
 </div>

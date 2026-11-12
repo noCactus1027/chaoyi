@@ -108,24 +108,73 @@ img.is-missing::after { content: "圖片待補：" attr(data-missing); position:
 .about-image { margin: 0; }
 .about-image img { width: 100%; height: auto; }
 
-/* ===== 手機與平板 ===== */
+/* ===== 手機版（照原網站的手機版排版） =====
+   原網站手機版以 320px 寬設計、再等比放大到手機螢幕，
+   所以這裡用 --m（設計稿上的 1px）當單位；平板最多放大到 520px 寬。 */
+.menu-toggle, .mobile-menu { display: none; }
 @media (max-width: 820px) {
-  .site-header { position: relative; padding: 1rem 1.25rem 0; }
-  .logo { position: static; width: min(70%, 320px); }
-  .nav { position: static; flex-wrap: wrap; gap: .3rem 1.2rem; font-size: 17px; margin-top: .6rem; }
+  :root { --m: min(calc(100vw / 320), 1.625px); }
+  body { font-size: calc(16 * var(--m)); }
+  .frame { max-width: calc(320 * var(--m)); }
+
+  /* 頁首：名字標誌跟著頁面捲動，選單按鈕固定在右上角 */
+  .site-header { position: relative; height: calc(140 * var(--m)); }
+  .logo { position: absolute; left: calc(20 * var(--m)); top: calc(20 * var(--m)); width: calc(204 * var(--m)); }
+  .nav { display: none; }
+  .menu-toggle { display: block; position: fixed; z-index: 80; top: 10px; right: max(10px, calc((100vw - 320 * var(--m)) / 2 + 10 * var(--m)));
+    width: 50px; height: 50px; padding: 0; border: 0; background: transparent; cursor: pointer; pointer-events: auto; }
+  .menu-toggle span { position: absolute; left: 12px; height: 3px; width: 26px; background: #000; transition: transform .3s ease, width .3s ease, opacity .2s; }
+  .menu-toggle span:nth-child(1) { top: 15px; width: 13px; }
+  .menu-toggle span:nth-child(2) { top: 24px; }
+  .menu-toggle span:nth-child(3) { top: 33px; width: 13px; left: 25px; }
+  .menu-open .menu-toggle span:nth-child(1) { top: 24px; width: 26px; transform: rotate(45deg); }
+  .menu-open .menu-toggle span:nth-child(2) { opacity: 0; }
+  .menu-open .menu-toggle span:nth-child(3) { top: 24px; left: 12px; width: 26px; transform: rotate(-45deg); }
+
+  /* 展開的選單：白色全螢幕，選單項目在右側 260px 的區塊內 */
+  .mobile-menu { display: flex; flex-direction: column; gap: 10px; position: fixed; inset: 0; z-index: 70;
+    padding: 100px 0 0 max(30px, calc(100vw - 260px + 30px)); background: #fff;
+    font-family: var(--serif); font-size: 20px; line-height: 1.4;
+    opacity: 0; visibility: hidden; transition: opacity .4s ease, visibility 0s .4s; }
+  .menu-open .mobile-menu { opacity: 1; visibility: visible; transition: opacity .4s ease; }
+  .mobile-menu a { color: rgb(65, 65, 65); text-decoration: none; padding: 6px 0; }
+  .mobile-menu a[aria-current="page"] { color: var(--muted); }
+  .menu-open { overflow: hidden; }
+
+  /* 首頁與 Graphic Design：作品封面一張一張往下排 */
   .dieline { display: none; }
-  .tile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; padding: 1.5rem 1.25rem 2rem; }
-  .tile { text-decoration: none; }
+  .tile-grid { display: grid; gap: calc(20 * var(--m)); padding: 0 calc(20 * var(--m)) calc(20 * var(--m)); }
   .tile img { width: 100%; aspect-ratio: 1; object-fit: cover; }
-  .site-footer { position: static; padding: 1rem 1.25rem 2rem; }
-  .project, .about { grid-template-columns: 1fr; padding: 1.75rem 1.25rem 2rem; gap: 1.5rem; }
-  .project-info { position: static; width: auto; height: auto; padding: 0; overflow: visible; }
-  .project-media { grid-column: auto; padding: 0 0 1rem; }
-  .next { position: static; align-self: flex-end; margin-top: 1rem; }
-  .about-text { padding-top: 0; }
+
+  /* 作品頁：文字在上、圖片在下 */
+  .project, .about { display: block; padding: calc(20 * var(--m)) calc(20 * var(--m)) 0; }
+  .project-info { position: static; width: auto; height: auto; padding: 0 0 calc(24 * var(--m)); overflow: visible; display: block; }
+  .project-info h1, .about-text h1 { font-size: calc(30 * var(--m)); margin-bottom: calc(6 * var(--m)); }
+  .project-info h1 small { font-size: calc(14 * var(--m)); }
+  .project-info p, .about-text p { max-width: none; }
+  .meta { font-size: calc(13 * var(--m)); gap: calc(14 * var(--m)) calc(24 * var(--m)); margin: calc(18 * var(--m)) 0 0; }
+  .project-media { padding: 0; gap: calc(10 * var(--m)); }
   .shot { width: 100% !important; margin-left: 0 !important; }
-  .slideshow button { font-size: 40px; }
-  .about-image { order: -1; }
+  .shot.shot-small { width: 70% !important; }
+  .shot.shot-right { margin-left: auto !important; }
+  .caption { font-size: calc(13 * var(--m)); margin: calc(16 * var(--m)) 0 0; }
+  /* 輪播在手機上改成兩欄小圖，點圖可放大 */
+  .slides { grid-template-columns: 1fr 1fr; gap: calc(6 * var(--m)); align-items: start; }
+  .slide { grid-area: auto; opacity: 1; visibility: visible; }
+  .slideshow button, .ss-count { display: none; }
+  .next { position: static; align-self: flex-end; margin: calc(14 * var(--m)) 0 0; font-size: calc(13 * var(--m)); }
+
+  /* About：手機版只有文字 */
+  .about-text { padding: 0; }
+  .about-image { display: none; }
+
+  .site-footer { position: static; padding: calc(30 * var(--m)) calc(20 * var(--m)) calc(20 * var(--m)); }
+  .site-footer .copyright { font-size: 10px; }
+
+  /* 手機版：文字不浮出；名字標誌與選單按鈕第一次進站時從下方浮入 */
+  html.anim body [data-anim="right"]:not(.in) { opacity: 1; }
+  html.anim body [data-anim="right"].in { animation: none; }
+  html.intro-logo body .logo img, html.intro body .logo img, html.intro body .menu-toggle { animation: float-in-bottom 1.2s cubic-bezier(.445,.05,.55,.95) backwards; }
 }
 
 /* ===== 動畫（同原網站設定） ===== */
@@ -137,6 +186,9 @@ html.anim [data-anim="right"].in { animation: float-in-right 1.2s cubic-bezier(.
 html.anim [data-anim="bottom"].in { animation: float-in-bottom 1.2s cubic-bezier(.39,.575,.565,1) backwards; }
 /* 名字標誌與選單：第一次進站時從右側浮入 */
 html.intro .logo img, html.intro .nav { animation: float-in-right 1.2s cubic-bezier(.39,.575,.565,1) backwards; }
+/* 首頁：名字標誌每次進來都從右側浮入（不參與換頁的淡入淡出，動畫才看得完整） */
+html.intro-logo .logo img { animation: float-in-right 1.2s cubic-bezier(.39,.575,.565,1) backwards; }
+html.intro-logo .logo { view-transition-name: none; }
 
 /* 換頁效果：舊頁淡出 0.35 秒，新頁再淡入 0.35 秒（OutIn） */
 @view-transition { navigation: auto; }

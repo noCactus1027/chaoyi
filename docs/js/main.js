@@ -46,6 +46,21 @@ document.querySelectorAll('.dieline .face').forEach(face => {
   preview.addEventListener('mouseleave', off);
 });
 
+// ===== 手機版選單 =====
+const toggle = document.querySelector('.menu-toggle');
+if (toggle) {
+  const root = document.documentElement;
+  const setOpen = open => {
+    root.classList.toggle('menu-open', open);
+    toggle.setAttribute('aria-expanded', open);
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
+  toggle.addEventListener('click', () => setOpen(!root.classList.contains('menu-open')));
+  document.querySelectorAll('.mobile-menu a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+  window.addEventListener('pageshow', () => setOpen(false));
+}
+
 // ===== 放大檢視 =====
 const lb = document.querySelector('.lightbox');
 const lbImg = lb.querySelector('img');
