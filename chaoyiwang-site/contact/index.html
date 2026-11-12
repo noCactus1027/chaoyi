@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact | Chao-Yi Wang</title>
+<meta name="description" content="Chao-Yi Wang 王昭怡 — Package Designer in New York City.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400&family=Newsreader:opsz,wght@6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="frame">
+<header class="site-header">
+  <a class="logo" href="../index.html"><img src="../img/logo.avif" alt="Chao-Yi Wang 王昭怡"></a>
+  <nav class="nav"><a href="../index.html">Package Design</a><a href="../graphic-design/index.html">Graphic Design</a><a href="../about/index.html">About</a><a href="../contact/index.html" aria-current="page">Contact</a></nav>
+</header>
+<main class="contact">
+  <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <h1>Contact</h1>
+    <div class="row">
+      <label>First Name *<input name="first_name" required autocomplete="given-name"></label>
+      <label>Last Name *<input name="last_name" required autocomplete="family-name"></label>
+    </div>
+    <label>E-mail *<input type="email" name="email" required autocomplete="email"></label>
+    <label>Message *<textarea name="message" rows="6" required></textarea></label>
+    <button type="submit">Submit</button>
+    <p class="form-status" role="status" aria-live="polite"></p>
+  </form>
+</main>
+<footer class="site-footer"><p class="copyright">© 2022 by Chao-Yi Wang.</p></footer>
+</div>
+<dialog class="lightbox" aria-label="Image viewer">
+  <button class="lb-close" aria-label="Close">×</button>
+  <button class="lb-prev" aria-label="Previous image">‹</button>
+  <img alt="">
+  <button class="lb-next" aria-label="Next image">›</button>
+</dialog>
+<script src="../js/main.js"></script>
+</body>
+</html>
