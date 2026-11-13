@@ -20,7 +20,12 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 html { color-scheme: light; }
-body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.4; overflow-x: hidden; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.4; overflow-x: hidden;
+  /* 和原網站相同的文字平滑設定（Mac 上字會比較細） */
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+/* 標題字體的粗細：Newsreader 350 最接近原網站 Domaine Display 的筆畫 */
+.face-label, .project-info h1, .about-text h1, .mm-panel { font-weight: 350; }
+.project-info h1 small { font-weight: 400; }
 img { max-width: 100%; display: block; }
 a { color: inherit; }
 :focus-visible { outline: 2px solid var(--black); outline-offset: 3px; }
@@ -58,26 +63,37 @@ a { color: inherit; }
 .tile-grid { display: none; }
 
 /* ===== 作品頁 ===== */
-.project { display: grid; grid-template-columns: 35% 1fr; column-gap: calc(2 * var(--u)); padding: 0 calc(6.5 * var(--u)) calc(6 * var(--u)) calc(5.2 * var(--u)); align-items: start; }
+/* 電腦版作品頁：右側作品區照原網站從 x=440、寬 1070（以 1440px 寬為準）排列 */
+.project { display: block; padding: 0 0 calc(6 * var(--u)); }
 /* 左欄文字固定在畫面中，右欄圖片捲動（和原網站一樣） */
-.project-info { position: fixed; z-index: 50; top: 0; left: calc(var(--edge) + 5.2 * var(--u)); width: min(calc(33.5 * var(--u)), 490px);
-  height: 100vh; padding: max(calc(23 * var(--u)), 150px) 0 3.5rem; overflow-y: auto; scrollbar-width: none;
-  display: flex; flex-direction: column; justify-content: center; }
+/* 左側文字固定在畫面下方（原網站的文字區塊底部距離畫面底部約 84px） */
+.project-info { position: fixed; z-index: 50; top: 0; left: calc(var(--edge) + 5.2 * var(--u)); width: calc(40 * var(--u));
+  height: 100vh; padding: max(calc(23 * var(--u)), 150px) 0 124px; overflow-y: auto; scrollbar-width: none;
+  display: flex; flex-direction: column; justify-content: flex-end; }
 .project-info::-webkit-scrollbar { display: none; }
-.project-media { grid-column: 2; }
-.project-media { padding-top: calc(17 * var(--u)); }
+.project-media { margin-left: calc(30.56 * var(--u)); width: calc(74.31 * var(--u)); }
 .project-info h1 { font-family: var(--serif); font-weight: 400; font-size: 40px; letter-spacing: .05em; line-height: 1.15; margin: 0 0 .7rem; color: var(--ink); }
 .project-info h1 small { font-family: var(--sans); font-size: 16px; letter-spacing: normal; font-weight: 400; }
-.project-info p { margin: 0 0 .6em; max-width: 31em; }
+.project-info p { margin: 0 0 .6em; }
+.project-info .desc { max-width: calc(var(--dw, 33) * var(--u)); }
 .project-info p a { text-decoration: underline; overflow-wrap: anywhere; }
-.meta { display: flex; flex-wrap: wrap; gap: 1.2rem 2.4rem; margin: 1.6rem 0 2.2rem; font-size: 14px; }
+.meta { display: flex; flex-wrap: wrap; gap: 1.2rem 0; margin: 1.6rem 0 0; font-size: 14px; }
+.meta > div { width: calc(var(--cw, 9) * var(--u)); padding-right: 1rem; }
 .meta dt { color: var(--muted); margin-bottom: .5rem; }
 .meta dd { margin: 0; }
 
-.project-media { display: flex; flex-direction: column; gap: 1.2rem; min-width: 0; padding-bottom: 110px; }
+.project-media { display: flex; flex-direction: column; min-width: 0; padding-bottom: 110px; }
+.project .project-media > * { margin-top: calc(var(--dt, 1.2) * var(--u)); position: relative; z-index: var(--dz, auto); }
+.project .project-media > .next { margin: 0; position: fixed; }
+/* 輪播框的比例照原網站，圖片完整顯示在框內 */
+.project-media > .slideshow { aspect-ratio: var(--dar, auto); overflow: hidden; }
+.project-media > .slideshow .slides { height: 100%; grid-template-rows: 100%; }
+.project-media > .slideshow .slide { height: 100%; min-height: 0; }
+.project-media > .slideshow .slide img { height: 100%; object-fit: contain; }
 .shot { margin: 0; }
 .shot img { width: 100%; height: auto; }
-.caption { display: flex; justify-content: space-between; max-width: 600px; margin: 2.2rem 0 -.6rem; font-size: 15px; }
+.caption { display: flex; justify-content: space-between; margin: 0; font-size: 15px; }
+.caption span + span { font-style: italic; }
 .next { position: fixed; z-index: 51; right: calc(var(--edge) + 5.56 * var(--u)); bottom: 40px; padding: .55rem 1.1rem; background: #fff; border: 1px solid var(--black); color: var(--black); text-decoration: none; font-size: 15px; transition: background .2s, color .2s; }
 .next:hover { background: var(--black); color: #fff; }
 
@@ -182,7 +198,8 @@ img.is-missing::after { content: "圖片待補：" attr(data-missing); position:
   .project-info .desc { font-size: calc(var(--mdesc, 12) * var(--m)); line-height: 1.4; }
   .project-info p { max-width: none; margin: 0; }
   .meta { display: block; margin: calc(10 * var(--m)) 0 0; font-size: calc(14 * var(--m)); }
-  .meta > div { margin: 0; }
+  .meta > div { margin: 0; width: auto; padding: 0; }
+  .project-media > .slideshow .slide img { object-fit: cover; }
   .meta dt { color: #a0a09f; line-height: calc(34 * var(--m)); margin: 0 0 calc(10 * var(--m)); }
   .meta dd { line-height: 1.6; margin: 0 0 calc(10 * var(--m)); }
   .project .shot { z-index: var(--mz, auto); }
@@ -190,7 +207,8 @@ img.is-missing::after { content: "圖片待補：" attr(data-missing); position:
   .project .shot img, .project .shot video { width: 100%; height: auto; aspect-ratio: var(--mw) / var(--mh) !important; object-fit: cover; }
   .project .shot:not([style*="--mw"]) img, .project .shot:not([style*="--mw"]) video { aspect-ratio: auto !important; }
   .m-hide { display: none !important; }
-  .project .caption { display: block; width: calc(280 * var(--m)); font-size: calc(16 * var(--m)); line-height: calc(22 * var(--m)); margin: calc(var(--mt, 16) * var(--m)) 0 0; }
+  .project .caption { display: block; width: calc(280 * var(--m)) !important; font-size: calc(16 * var(--m)); line-height: calc(22 * var(--m)); margin: calc(var(--mt, 16) * var(--m)) 0 0 !important; }
+  .project-info .desc { max-width: none; }
   .project .caption { text-align: center; }
   .project .caption span { display: block; }
   .project .caption span + span { font-style: italic; }
