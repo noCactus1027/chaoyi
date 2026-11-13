@@ -1,10 +1,12 @@
-/* ===== 顏色與字體（想換字體只要改這裡） =====
-   原網站用的是 Domaine Display 和 Neuzeit S。
-   如果你有這兩套字體的網頁授權，把 woff2 檔放進 fonts/ 資料夾，
-   並取消下面 @font-face 的註解即可。 */
+/* ===== 顏色與字體 =====
+   內文字體：Neuzeit S Book（原網站上傳到 Wix 的字體檔，放在 fonts/）。
+   標題字體：原網站用的是 Klim 的「Test Domaine Display」，這是試用版字體，
+   授權只允許測試、不能用在正式網站，所以這裡改用外觀最接近的免費字體 Newsreader。
+   如果你購買了 Domaine Display 的網頁授權，把 woff2 檔命名為 DomaineDisplay-Regular.woff2
+   放進 fonts/，再取消下面第二個 @font-face 的註解即可。 */
+@font-face { font-family: "Neuzeit S"; src: url("../fonts/NeuzeitS-Book.woff2") format("woff2"); font-weight: 400; font-display: swap; }
 /*
 @font-face { font-family: "Domaine Display"; src: url("../fonts/DomaineDisplay-Regular.woff2") format("woff2"); font-display: swap; }
-@font-face { font-family: "Neuzeit S"; src: url("../fonts/NeuzeitS-Book.woff2") format("woff2"); font-display: swap; }
 */
 :root {
   --ink: #2f2e2e;
@@ -13,7 +15,7 @@
   --line: #2f2e2e;
   --bg: #fff;
   --serif: "Domaine Display", "Newsreader", "Songti TC", Georgia, serif;
-  --sans: "Neuzeit S", "Jost", "PingFang TC", "Helvetica Neue", Arial, sans-serif;
+  --sans: "Neuzeit S", "Albert Sans", "PingFang TC", "Helvetica Neue", Arial, sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -34,7 +36,7 @@ a { color: inherit; }
 .site-header a { pointer-events: auto; }
 .logo { position: fixed; z-index: 53; left: calc(var(--edge) + 4.51 * var(--u)); top: calc(1.39 * var(--u)); width: calc(39.7 * var(--u)); display: block; pointer-events: none; }
 .logo img { pointer-events: auto; }
-.nav { position: fixed; z-index: 55; right: calc(var(--edge) + 3 * var(--u)); top: calc(8.3 * var(--u)); display: flex; gap: calc(2.2 * var(--u)); font-size: max(15px, calc(2.15 * var(--u))); font-weight: 300; line-height: 1.6; }
+.nav { position: fixed; z-index: 55; right: calc(var(--edge) + 3 * var(--u)); top: calc(8.3 * var(--u)); display: flex; gap: calc(2.2 * var(--u)); font-size: max(15px, calc(2.15 * var(--u))); font-weight: 400; line-height: 1.6; }
 .nav a { text-decoration: none; color: var(--black); white-space: nowrap; transition: color .2s; }
 .nav a:hover, .nav a[aria-current="page"] { color: var(--muted); }
 
@@ -188,10 +190,16 @@ img.is-missing::after { content: "圖片待補：" attr(data-missing); position:
   .project-info .m-only { display: block; margin-bottom: calc(10 * var(--m)); }
   /* 輪播：280×200 的框，有細框線與左右箭頭 */
   .project .slideshow { height: calc(var(--mh, 200) * var(--m)); border: 1px solid var(--ink); background: #fff; overflow: hidden; }
-  .slideshow .slides, .slideshow .slide { height: 100%; }
-  .slide img { width: 100%; height: 100%; object-fit: contain; }
+  .slideshow .slides { height: 100%; grid-template-rows: 100%; }
+  .slideshow .slide { height: 100%; min-height: 0; }
+  /* 原網站手機版的輪播是「填滿」：圖片鋪滿框，多出來的部分裁掉 */
+  .slide img { width: 100%; height: 100% !important; aspect-ratio: auto !important; object-fit: cover; }
   .project .slideshow.ss-plain { border: 0; }
-  .slideshow button { font-size: calc(30 * var(--m)); color: #999; text-shadow: none; padding: 0 calc(8 * var(--m)); }
+  /* 細線箭頭 */
+  .slideshow button { width: calc(30 * var(--m)); height: calc(60 * var(--m)); padding: 0; font-size: 0; color: transparent; text-shadow: none; }
+  .slideshow button::before { content: ""; position: absolute; top: 50%; left: 50%; width: calc(14 * var(--m)); height: calc(14 * var(--m));
+    border: solid #bbb; border-width: 0 0 1.5px 1.5px; transform: translate(-30%, -50%) rotate(45deg); }
+  .slideshow .ss-next::before { transform: translate(-70%, -50%) rotate(-135deg); }
   .ss-count { display: none; }
   .next { display: none; }
 

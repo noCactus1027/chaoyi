@@ -49,7 +49,8 @@
 
 ## 字體
 
-原網站使用 Domaine Display（標題）和 Neuzeit S（內文），這兩套是商業字體，Wix 的授權不會跟著搬過來，所以目前用免費的 Newsreader 和 Jost 替代。如果你有網頁授權，把 woff2 字體檔放進 `fonts/` 資料夾，再依照 `css/style.css` 最上方的註解啟用即可。
+- **內文（Neuzeit S Book）**：使用原網站上傳到 Wix 的字體檔，放在 `fonts/NeuzeitS-Book.woff2`。這是商業字體，請確認你的授權包含網頁使用（當初上傳到 Wix 也需要同樣的授權）。
+- **標題（Domaine Display）**：原網站用的是 Klim Type Foundry 的「Test Domaine Display」試用版，試用授權不允許用在正式網站，所以目前用外觀最接近的免費字體 Newsreader 代替。若購買了網頁授權，把字體檔命名為 `DomaineDisplay-Regular.woff2` 放進 `fonts/`，再依照 `css/style.css` 最上方的說明啟用即可。
 
 ## 正式上線（私人儲存庫 + Cloudflare Pages）
 
