@@ -31,15 +31,7 @@
 
 ## 影片
 
-原網站有 4 支影片。Wedding Invite 的影片已經放好；另外 3 支沒能從掃描紀錄取得，請從 Wix 媒體管理員下載後，改成下表的檔名放進對應資料夾，網頁就會自動播放，不需要改程式碼。放進來之前，自動播放的影片會先顯示封面圖，Gua Sha 的影片位置會顯示「影片待補」。
-
-| 頁面 | 放置位置與檔名 | 說明 |
-|---|---|---|
-| Drag Show | `video/gd-929-drag-show/new-years-eve.mp4` | New Year’s Eve Drag Show 海報動畫，自動循環播放 |
-| Taiwan Pride | `video/gd-taiwanpride/reel.mp4` | Instagram Reel，自動循環播放 |
-| Gua Sha | `video/gua-sha/product-video.mp4` | 產品影片，按播放鍵才播放 |
-
-自動播放的影片預設靜音（瀏覽器規定），右下角有聲音開關。
+原網站的 4 支影片都已放好（Wedding Invite、Drag Show、Gua Sha、Taiwan Pride），檔案都已壓縮成適合網頁的大小，放在 `video/` 資料夾。自動播放的影片預設靜音（瀏覽器規定），右下角有聲音開關。
 
 ## 修改內容
 

@@ -57,6 +57,7 @@ if (toggle) {
   };
   toggle.addEventListener('click', () => setOpen(!root.classList.contains('menu-open')));
   document.querySelectorAll('.mobile-menu a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+  document.querySelector('.mm-overlay').addEventListener('click', () => setOpen(false));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
   window.addEventListener('pageshow', () => setOpen(false));
 }

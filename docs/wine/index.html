@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400&family=Newsreader:opsz,wght@6..72,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/style.css?v=202611131057">
+<link rel="stylesheet" href="../css/style.css?v=202611131121">
 <script>
   // 進場動畫：先把要浮出的元素藏起來，避免閃一下
   document.documentElement.classList.add('anim');
@@ -21,17 +21,17 @@
 <header class="site-header">
   <a class="logo" href="../index.html"><img src="../img/logo.avif" alt="Chao-Yi Wang 王昭怡"></a>
   <nav class="nav"><a href="../index.html" aria-current="page">Package Design</a><a href="../graphic-design/index.html">Graphic Design</a><a href="../about/index.html">About</a></nav>
-  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span></span><span></span><span></span></button>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span class="mt-box"><span class="mt-l1"></span><span class="mt-l2"></span><span class="mt-l3"></span></span></button>
 </header>
-<nav class="mobile-menu" id="mobile-menu" aria-label="Menu"><a href="../index.html" aria-current="page">Package Design</a><a href="../graphic-design/index.html">Graphic Design</a><a href="../about/index.html">About</a></nav>
+<div class="mobile-menu" id="mobile-menu"><div class="mm-overlay"></div><nav class="mm-panel" aria-label="Menu"><a href="../index.html" aria-current="page">Package Design</a><a href="../graphic-design/index.html">Graphic Design</a><a href="../about/index.html">About</a></nav></div>
 <main class="project">
-  <aside class="project-info" style="--mo:1;--mt:20;--mx:0;--mw:280;--mh:614;--mtitle:30;--msub:16;--mdesc:12">
+  <aside class="project-info" style="--mo:1;--mt:20;--mx:0;--mw:280;--mh:614;--mz:0;--mtitle:30;--msub:16;--mdesc:12">
     <h1 data-anim="right">Wine <small>/ Flavor Visualization /</small></h1>
     <div class="desc" data-anim="right"><p>The design utilized blind embossed streamlines pouring down from the name of the wines to the Public Goods slogan “it’s all good”, hinting that the ingredients of our products can’t always be seen, but it’s all there, all good.<br>Each unique shape of waves symbolizes the senses you feel from that very first sip of these exquisite flavors. The classic black and white color palette not only communicates the minimal and elegant visual of Public Goods, but stands out from the color competitive world of wine labels. This design is not solely geared to online subscribers, but to people looking, touching and feeling out a gift for their loved ones, themselves, or clients at a liquor store.<br>This is a concept project.</p></div>
     <dl class="meta"><div data-anim="right"><dt>Client /</dt><dd>Public Goods</dd></div><div data-anim="right"><dt>Category /</dt><dd>Package Design</dd></div><div data-anim="right"><dt>Year /</dt><dd>2021 - 2022</dd></div></dl>
   </aside>
   <section class="project-media">
-    <div class="slideshow" data-count="9" style="--mo:2;--mt:12;--mx:0;--mw:280;--mh:200">
+    <div class="slideshow" data-count="9" style="--mo:2;--mt:12;--mx:0;--mw:280;--mh:200;--mz:0">
   <ul class="slides"><li class="slide"><img src="../img/wine/slide-01.avif" alt="Wine 1" style="aspect-ratio:7680/5664" onerror="this.classList.add('is-missing')"></li><li class="slide"><img src="../img/wine/slide-02.avif" alt="Wine 2" loading="lazy" style="aspect-ratio:7680/5664" onerror="this.classList.add('is-missing')"></li><li class="slide"><img src="../img/wine/slide-03.avif" alt="Wine 3" loading="lazy" style="aspect-ratio:7680/5664" onerror="this.classList.add('is-missing')"></li><li class="slide"><img src="../img/wine/slide-04.avif" alt="Wine 4" loading="lazy" style="aspect-ratio:6696/4500" onerror="this.classList.add('is-missing')"></li><li class="slide"><img src="../img/wine/slide-05.avif" alt="Wine 5" loading="lazy" style="aspect-ratio:6696/4500" onerror="this.classList.add('is-missing')"></li><li class="slide"><img src="../img/wine/slide-06.avif" alt="Wine 6" loading="lazy" style="aspect-ratio:6696/4500" onerror="this.classList.add('is-missing')"></li><li class="slide"><img src="../img/wine/slide-07.avif" alt="Wine 7" loading="lazy" style="aspect-ratio:6696/4500" onerror="this.classList.add('is-missing')"></li><li class="slide"><img src="../img/wine/slide-08.avif" alt="Wine 8" loading="lazy" style="aspect-ratio:6696/4500" onerror="this.classList.add('is-missing')"></li><li class="slide"><img src="../img/wine/slide-09.avif" alt="Wine 9" loading="lazy" style="aspect-ratio:6696/4500" onerror="this.classList.add('is-missing')"></li></ul>
   <button class="ss-prev" aria-label="Previous image">‹</button>
   <button class="ss-next" aria-label="Next image">›</button>
@@ -48,6 +48,6 @@
   <img alt="">
   <button class="lb-next" aria-label="Next image">›</button>
 </dialog>
-<script src="../js/main.js?v=202611131057"></script>
+<script src="../js/main.js?v=202611131121"></script>
 </body>
 </html>

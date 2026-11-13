@@ -138,24 +138,30 @@ img.is-missing::after { content: "圖片待補：" attr(data-missing); position:
   .site-header { position: relative; height: calc(140 * var(--m)); }
   .logo { position: absolute; left: calc(20 * var(--m)); top: calc(20 * var(--m)); width: calc(204 * var(--m)); }
   .nav { display: none; }
-  .menu-toggle { display: block; position: fixed; z-index: 80; top: 10px; right: max(10px, calc((100vw - 320 * var(--m)) / 2 + 10 * var(--m)));
-    width: 50px; height: 50px; padding: 0; border: 0; background: transparent; cursor: pointer; pointer-events: auto; }
-  .menu-toggle span { position: absolute; left: 12px; height: 3px; width: 26px; background: #000; transition: transform .3s ease, width .3s ease, opacity .2s; }
-  .menu-toggle span:nth-child(1) { top: 15px; width: 13px; }
-  .menu-toggle span:nth-child(2) { top: 24px; }
-  .menu-toggle span:nth-child(3) { top: 33px; width: 13px; left: 25px; }
-  .menu-open .menu-toggle span:nth-child(1) { top: 24px; width: 26px; transform: rotate(45deg); }
-  .menu-open .menu-toggle span:nth-child(2) { opacity: 0; }
-  .menu-open .menu-toggle span:nth-child(3) { top: 24px; left: 12px; width: 26px; transform: rotate(-45deg); }
+  /* 選單按鈕：照原網站的三條線（上短、中長、下短），點開時會先微微往反方向彈一下再轉成叉叉 */
+  .menu-toggle { display: flex; align-items: center; justify-content: center; position: fixed; z-index: 80;
+    top: calc(10 * var(--m)); right: max(calc(10 * var(--m)), calc((100vw - 320 * var(--m)) / 2 + 10 * var(--m)));
+    width: calc(50 * var(--m)); height: calc(50 * var(--m)); padding: 0; border: 0; background: transparent; cursor: pointer;
+    pointer-events: auto; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+  .mt-box { display: flex; flex-direction: column; justify-content: space-between; width: calc(26 * var(--m)); height: calc(21 * var(--m)); transition: transform .33s ease-out; }
+  .mt-box span { display: block; width: 100%; height: calc(3 * var(--m)); border-radius: calc(1.5 * var(--m)); background: #000; }
+  .mt-box .mt-l1 { width: 50%; transform-origin: 100%; transition: transform .33s cubic-bezier(.54,-.81,.57,.57); }
+  .mt-box .mt-l3 { width: 50%; align-self: flex-end; transform-origin: 0; transition: transform .33s cubic-bezier(.54,-.81,.57,.57); }
+  .menu-open .mt-box { transform: rotate(-45deg); }
+  .menu-open .mt-box .mt-l1 { transform: rotate(-90deg) translateX(calc(4 * var(--m))); }
+  .menu-open .mt-box .mt-l3 { transform: rotate(-90deg) translateX(calc(-4 * var(--m))); }
 
-  /* 展開的選單：白色全螢幕，選單項目在右側 260px 的區塊內 */
-  .mobile-menu { display: flex; flex-direction: column; gap: 10px; position: fixed; inset: 0; z-index: 70;
-    padding: 100px 0 0 max(30px, calc(100vw - 260px + 30px)); background: #fff;
-    font-family: var(--serif); font-size: 20px; line-height: 1.4;
-    opacity: 0; visibility: hidden; transition: opacity .4s ease, visibility 0s .4s; }
-  .menu-open .mobile-menu { opacity: 1; visibility: visible; transition: opacity .4s ease; }
-  .mobile-menu a { color: rgb(65, 65, 65); text-decoration: none; padding: 6px 0; }
-  .mobile-menu a[aria-current="page"] { color: var(--muted); }
+  /* 展開的選單：左側半透明灰色遮罩，右側白色選單區塊 */
+  .mobile-menu { display: block; position: fixed; inset: 0; z-index: 70; visibility: hidden; transition: visibility 0s .4s; }
+  .menu-open .mobile-menu { visibility: visible; transition: none; }
+  .mm-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, .45); opacity: 0; transition: opacity .4s ease; }
+  .menu-open .mm-overlay { opacity: 1; }
+  .mm-panel { position: absolute; top: 0; bottom: 0; right: max(0px, calc((100vw - 320 * var(--m)) / 2)); width: calc(260 * var(--m)); background: #fff;
+    display: flex; flex-direction: column; gap: calc(22 * var(--m)); padding: calc(100 * var(--m)) calc(20 * var(--m)) 0 calc(30 * var(--m));
+    font-family: var(--serif); font-size: calc(16 * var(--m)); line-height: 1.4;
+    transform: translateX(100%); transition: transform .4s cubic-bezier(.22,1,.36,1); }
+  .menu-open .mm-panel { transform: none; }
+  .mm-panel a { color: #2f2e2e; text-decoration: none; }
   .menu-open { overflow: hidden; }
 
   /* 首頁與 Graphic Design：作品封面一張一張往下排 */
@@ -179,6 +185,7 @@ img.is-missing::after { content: "圖片待補：" attr(data-missing); position:
   .meta > div { margin: 0; }
   .meta dt { color: #a0a09f; line-height: calc(34 * var(--m)); margin: 0 0 calc(10 * var(--m)); }
   .meta dd { line-height: 1.6; margin: 0 0 calc(10 * var(--m)); }
+  .project .shot { z-index: var(--mz, auto); }
   .project .shot, .project .slideshow { width: calc(var(--mw, 280) * var(--m)) !important; margin: calc(var(--mt, 10) * var(--m)) 0 0 calc(var(--mx, 0) * var(--m)) !important; position: relative; }
   .project .shot img, .project .shot video { width: 100%; height: auto; aspect-ratio: var(--mw) / var(--mh) !important; object-fit: cover; }
   .project .shot:not([style*="--mw"]) img, .project .shot:not([style*="--mw"]) video { aspect-ratio: auto !important; }
@@ -217,7 +224,7 @@ img.is-missing::after { content: "圖片待補：" attr(data-missing); position:
   html.anim body [data-anim="right"].in { animation-name: float-in-bottom; }
   html.anim body .about [data-anim="right"]:not(.in) { opacity: 1; }
   html.anim body .about [data-anim="right"].in { animation: none; }
-  html.intro-logo body .logo img, html.intro body .logo img, html.intro body .menu-toggle { animation: float-in-bottom 1.2s cubic-bezier(.445,.05,.55,.95) backwards; }
+  html.intro-logo body .logo img, html.intro body .logo img, html.intro body .menu-toggle .mt-box { animation: float-in-bottom 1.2s cubic-bezier(.445,.05,.55,.95) backwards; }
 }
 
 /* ===== 動畫（同原網站設定） ===== */

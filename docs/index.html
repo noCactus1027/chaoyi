@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400&family=Newsreader:opsz,wght@6..72,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=202611131057">
+<link rel="stylesheet" href="css/style.css?v=202611131121">
 <script>
   // 進場動畫：先把要浮出的元素藏起來，避免閃一下
   document.documentElement.classList.add('anim');
@@ -22,9 +22,9 @@
 <header class="site-header">
   <a class="logo" href="index.html"><img src="img/logo.avif" alt="Chao-Yi Wang 王昭怡"></a>
   <nav class="nav"><a href="index.html" aria-current="page">Package Design</a><a href="graphic-design/index.html">Graphic Design</a><a href="about/index.html">About</a></nav>
-  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span></span><span></span><span></span></button>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span class="mt-box"><span class="mt-l1"></span><span class="mt-l2"></span><span class="mt-l3"></span></span></button>
 </header>
-<nav class="mobile-menu" id="mobile-menu" aria-label="Menu"><a href="index.html" aria-current="page">Package Design</a><a href="graphic-design/index.html">Graphic Design</a><a href="about/index.html">About</a></nav>
+<div class="mobile-menu" id="mobile-menu"><div class="mm-overlay"></div><nav class="mm-panel" aria-label="Menu"><a href="index.html" aria-current="page">Package Design</a><a href="graphic-design/index.html">Graphic Design</a><a href="about/index.html">About</a></nav></div>
 <main class="dieline" style="aspect-ratio:1440/1818">
 <img class="dieline-bg" data-anim="bottom" src="img/dieline/package-design.avif" alt="" style="left:-4.653%;top:14.136%;width:109.306%;height:83.663%">
 <a class="face" href="wine/index.html" style="left:27.778%;top:26.678%;width:14.792%;height:11.771%" aria-label="Wine"></a><span class="face-label" data-anim="bottom" style="left:31.181%;top:31.408%;width:7.986%;height:2.145%">Wine</span><a class="face-preview" href="wine/index.html" tabindex="-1" style="left:42.708%;top:26.788%;width:29.444%;height:23.322%"><img src="img/tiles/wine.avif" alt="Wine" onerror="this.classList.add('is-missing')"></a>
@@ -56,6 +56,6 @@
   <img alt="">
   <button class="lb-next" aria-label="Next image">›</button>
 </dialog>
-<script src="js/main.js?v=202611131057"></script>
+<script src="js/main.js?v=202611131121"></script>
 </body>
 </html>
