@@ -90,32 +90,89 @@ lb.querySelector('.lb-prev').addEventListener('click', () => lbShow(lbIndex - 1)
 lb.querySelector('.lb-next').addEventListener('click', () => lbShow(lbIndex + 1));
 lb.addEventListener('click', e => { if (e.target === lb) lb.close(); });
 
-// ===== 輪播 =====
+// ===== 輪播（照原網站設定：自動播放，每 3 秒換一張，左右滑動換圖） =====
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 document.querySelectorAll('.slideshow').forEach(ss => {
   const slides = [...ss.querySelectorAll('.slide')];
   const imgs = slides.map(s => s.querySelector('img'));
   const count = ss.querySelector('.ss-count span');
-  let i = 0;
-  const go = n => {
-    slides[i].classList.remove('is-active');
-    i = (n + slides.length) % slides.length;
-    slides[i].classList.add('is-active');
+  const interval = +ss.dataset.interval || 3000;
+  const duration = reduceMotion ? 0 : (+ss.dataset.duration || 1000);
+  let i = 0, busy = false, timer = null, paused = false;
+
+  const go = (n, dir) => {
+    if (busy || slides.length < 2) return;
+    n = (n + slides.length) % slides.length;
+    if (n === i) return;
+    dir = dir || (n > i ? 1 : -1);
+    const from = slides[i], to = slides[n];
+    busy = true;
+    to.style.transition = 'none';
+    to.style.transform = `translateX(${dir * 100}%)`;
+    to.classList.add('is-moving');
+    from.classList.add('is-moving'); // 舊的那張也要繼續顯示，兩張像捲軸一樣接著滑過去
+    to.offsetWidth; // 讓瀏覽器先套用起始位置
+    // 原網站的滑動曲線：起步慢、中段急速拉過去、最後慢慢停住
+    const t = `transform ${duration}ms cubic-bezier(.87, 0, .13, 1)`;
+    to.style.transition = from.style.transition = t;
+    to.style.transform = 'translateX(0)';
+    from.style.transform = `translateX(${-dir * 100}%)`;
+    from.classList.remove('is-active');
+    to.classList.add('is-active');
+    i = n;
     count.textContent = i + 1;
     const nxt = imgs[(i + 1) % imgs.length]; if (nxt.loading === 'lazy') nxt.loading = 'eager';
+    setTimeout(() => {
+      from.classList.remove('is-moving'); from.style.transition = ''; from.style.transform = '';
+      to.classList.remove('is-moving');
+      busy = false;
+      schedule();
+    }, duration + 20);
+  };
+  const schedule = () => {
+    clearTimeout(timer);
+    if (paused || reduceMotion || document.hidden || lb.open) return;
+    timer = setTimeout(() => go(i + 1, 1), interval);
   };
   slides[0].classList.add('is-active');
-  ss.querySelector('.ss-prev').addEventListener('click', () => go(i - 1));
-  ss.querySelector('.ss-next').addEventListener('click', () => go(i + 1));
-  imgs.forEach((img, k) => img.addEventListener('click', () => lbOpen(imgs, k)));
+  if (imgs[1] && imgs[1].loading === 'lazy') imgs[1].loading = 'eager';
+  ss.querySelector('.ss-prev').addEventListener('click', () => go(i - 1, -1));
+  ss.querySelector('.ss-next').addEventListener('click', () => go(i + 1, 1));
+  imgs.forEach((img, k) => img.addEventListener('click', () => { clearTimeout(timer); lbOpen(imgs, k); }));
+  // 滑鼠停在輪播上時暫停，移開後繼續
+  ss.addEventListener('mouseenter', () => { paused = true; clearTimeout(timer); });
+  ss.addEventListener('mouseleave', () => { paused = false; schedule(); });
+  document.addEventListener('visibilitychange', schedule);
+  lb.addEventListener('close', schedule);
   let x0 = null;
   ss.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
   ss.addEventListener('touchend', e => {
     if (x0 === null) return;
     const dx = e.changedTouches[0].clientX - x0;
-    if (Math.abs(dx) > 40) go(dx < 0 ? i + 1 : i - 1);
+    if (Math.abs(dx) > 40) go(dx < 0 ? i + 1 : i - 1, dx < 0 ? 1 : -1);
     x0 = null;
   });
+  schedule();
 });
+
+// 電腦版：輪播比畫面寬或被左側白色字卡蓋住時，把箭頭和張數移到看得到的位置
+const desktopMQ = window.matchMedia('(min-width: 821px)');
+function placeArrows() {
+  const card = document.querySelector('.project-info');
+  document.querySelectorAll('.slideshow').forEach(ss => {
+    const prev = ss.querySelector('.ss-prev'), next = ss.querySelector('.ss-next'), count = ss.querySelector('.ss-count');
+    if (!desktopMQ.matches) { [prev, next, count].forEach(e => { e.style.left = e.style.right = ''; }); return; }
+    const r = ss.getBoundingClientRect();
+    const cardRight = card ? card.getBoundingClientRect().right : 0;
+    const insetL = Math.max(0, cardRight - r.left);
+    const insetR = Math.max(0, r.right - document.documentElement.clientWidth);
+    prev.style.left = insetL + 'px';
+    next.style.right = insetR + 'px';
+    count.style.right = (insetR + 16) + 'px';
+  });
+}
+placeArrows();
+window.addEventListener('resize', placeArrows);
 
 // 單張作品圖也可以點開放大
 const shots = [...document.querySelectorAll('.shot img')];
