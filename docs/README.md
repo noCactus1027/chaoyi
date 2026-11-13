@@ -25,7 +25,9 @@
 
 ## 手機版
 
-螢幕寬度 820px 以下會切換成手機版，照原網站的手機版排版：以 320px 寬設計再等比放大，名字標誌在左上、右上角是固定的選單按鈕（點開是白色全螢幕選單）。首頁和 Graphic Design 改成作品封面一張張往下排，作品頁是文字在上、圖片在下，輪播改成兩欄小圖（點圖可放大），About 只顯示文字。手機版的作品排列順序可以在 `build` 用的 `MOBILE_ORDER` 中調整；直接改 HTML 的話，順序在 `index.html` 與 `graphic-design/index.html` 的 `tile-grid` 區塊裡。
+螢幕寬度 820px 以下會切換成手機版。版面是照原網站手機版逐頁量出來的：以 320px 寬設計再等比放大，每張圖片的位置、大小、重疊方式和文字大小都和原網站相同。右上角是固定的選單按鈕，點開是白色全螢幕選單。手機版沒有 Next Project 按鈕，也和原網站一致。
+
+首頁的手機版作品順序為：Gua Sha、Tampons & Pads、Wine、Fragrance、Herbal Tea、Cosmetic、Craft Beer、Vibrator、Tampon。原網站手機版有幾個重疊錯誤（Cosmetic 被 Herbal Tea 蓋住、Vibrator 被 Tampon 蓋住、Tampon 出現兩次），新版已修正，9 件作品都會完整顯示一次。
 
 ## 影片
 

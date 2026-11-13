@@ -158,33 +158,48 @@ img.is-missing::after { content: "圖片待補：" attr(data-missing); position:
 
   /* 首頁與 Graphic Design：作品封面一張一張往下排 */
   .dieline { display: none; }
-  .tile-grid { display: grid; gap: calc(20 * var(--m)); padding: 0 calc(20 * var(--m)) calc(20 * var(--m)); }
+  .tile-grid { display: grid; gap: calc(10 * var(--m)); padding: calc(var(--mtop, 10) * var(--m)) calc(20 * var(--m)) 0; }
   .tile img { width: 100%; aspect-ratio: 1; object-fit: cover; }
 
-  /* 作品頁：文字在上、圖片在下 */
-  .project, .about { display: block; padding: calc(20 * var(--m)) calc(20 * var(--m)) 0; }
-  .project-info { position: static; width: auto; height: auto; padding: 0 0 calc(24 * var(--m)); overflow: visible; display: block; }
-  .project-info h1, .about-text h1 { font-size: calc(30 * var(--m)); margin-bottom: calc(6 * var(--m)); }
-  .project-info h1 small { font-size: calc(14 * var(--m)); }
-  .project-info p, .about-text p { max-width: none; }
-  .meta { font-size: calc(13 * var(--m)); gap: calc(14 * var(--m)) calc(24 * var(--m)); margin: calc(18 * var(--m)) 0 0; }
-  .project-media { padding: 0; gap: calc(10 * var(--m)); }
-  .shot { width: 100% !important; margin-left: 0 !important; }
-  .shot.shot-small { width: 70% !important; }
-  .shot.shot-right { margin-left: auto !important; }
+  /* 作品頁：照原網站手機版逐頁的位置排列（--mo 順序、--mt 上方間距、--mx 左側位移、--mw/--mh 寬高）
+     有負的上方間距時會像原網站一樣部分重疊 */
+  .project { display: flex; flex-direction: column; padding: 0 calc(20 * var(--m)); }
+  .project-media { display: contents; }
+  .project > *, .project-media > * { order: var(--mo, 50); }
+  .project-info { position: static; width: auto; height: auto; overflow: visible; display: block;
+    margin-top: calc(var(--mt, 10) * var(--m)); padding: calc(10 * var(--m)); }
+  .project-info h1 { font-size: calc(var(--mtitle, 30) * var(--m)); line-height: 1.6; margin: 0; letter-spacing: .05em; }
+  .project-info h1 small { font-size: calc(var(--msub, 16) * var(--m)); letter-spacing: .05em; display: inline-block; white-space: nowrap; }
+  .project .shot-border { outline: 1px solid var(--ink); outline-offset: -1px; }
+  .project-info .desc { font-size: calc(var(--mdesc, 12) * var(--m)); line-height: 1.4; }
+  .project-info p { max-width: none; margin: 0; }
+  .meta { display: block; margin: calc(10 * var(--m)) 0 0; font-size: calc(14 * var(--m)); }
+  .meta > div { margin: 0; }
+  .meta dt { color: #a0a09f; line-height: calc(34 * var(--m)); margin: 0 0 calc(10 * var(--m)); }
+  .meta dd { line-height: 1.6; margin: 0 0 calc(10 * var(--m)); }
+  .project .shot, .project .slideshow { width: calc(var(--mw, 280) * var(--m)) !important; margin: calc(var(--mt, 10) * var(--m)) 0 0 calc(var(--mx, 0) * var(--m)) !important; position: relative; }
+  .project .shot img, .project .shot video { width: 100%; height: auto; aspect-ratio: var(--mw) / var(--mh) !important; object-fit: cover; }
+  .project .shot:not([style*="--mw"]) img, .project .shot:not([style*="--mw"]) video { aspect-ratio: auto !important; }
+  .m-hide { display: none !important; }
   .caption { font-size: calc(13 * var(--m)); margin: calc(16 * var(--m)) 0 0; }
-  /* 輪播在手機上改成兩欄小圖，點圖可放大 */
-  .slides { grid-template-columns: 1fr 1fr; gap: calc(6 * var(--m)); align-items: start; }
-  .slide { grid-area: auto; opacity: 1; visibility: visible; }
-  .slideshow button, .ss-count { display: none; }
-  .next { position: static; align-self: flex-end; margin: calc(14 * var(--m)) 0 0; font-size: calc(13 * var(--m)); }
+  /* 輪播：280×200 的框，有細框線與左右箭頭 */
+  .project .slideshow { height: calc(var(--mh, 200) * var(--m)); border: 1px solid var(--ink); background: #fff; overflow: hidden; }
+  .slideshow .slides, .slideshow .slide { height: 100%; }
+  .slide img { width: 100%; height: 100%; object-fit: contain; }
+  .project .slideshow.ss-plain { border: 0; }
+  .slideshow button { font-size: calc(30 * var(--m)); color: #999; text-shadow: none; padding: 0 calc(8 * var(--m)); }
+  .ss-count { display: none; }
+  .next { display: none; }
 
   /* About：手機版只有文字 */
+  .about { display: block; min-height: 0; padding: calc(20 * var(--m)) calc(20 * var(--m)) 0; }
   .about-text { padding: 0; }
+  .about-text h1 { font-size: calc(30 * var(--m)); margin: 0 0 calc(4 * var(--m)); }
+  .about-text p { font-size: calc(14 * var(--m)); line-height: 1.6; }
   .about-image { display: none; }
 
-  .site-footer { position: static; padding: calc(30 * var(--m)) calc(20 * var(--m)) calc(20 * var(--m)); }
-  .site-footer .copyright { font-size: 10px; }
+  .site-footer { position: static; padding: calc(25 * var(--m)) calc(21 * var(--m)) calc(20 * var(--m)); }
+  .site-footer .copyright { font-size: calc(7 * var(--m)); color: #636363; }
 
   /* 手機版：文字不浮出；名字標誌與選單按鈕第一次進站時從下方浮入 */
   html.anim body [data-anim="right"]:not(.in) { opacity: 1; }
