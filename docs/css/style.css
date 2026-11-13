@@ -24,7 +24,8 @@ body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--s
   /* 和原網站相同的文字平滑設定（Mac 上字會比較細） */
   -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 /* 標題字體的粗細：Newsreader 350 最接近原網站 Domaine Display 的筆畫 */
-.face-label, .project-info h1, .about-text h1, .mm-panel { font-weight: 350; }
+.project-info h1, .about-text h1, .mm-panel { font-weight: 350; }
+.face-label { font-weight: 400; }
 .project-info h1 small { font-weight: 400; }
 img { max-width: 100%; display: block; }
 a { color: inherit; }
@@ -56,12 +57,13 @@ a { color: inherit; }
 .dieline-bg { max-width: none; pointer-events: none; }
 .face { z-index: 3; }
 .face-label { z-index: 2; display: flex; align-items: center; justify-content: center; text-align: center;
-  font-family: var(--serif); font-size: calc(1.95 * var(--u)); line-height: 1.2; color: rgb(65, 65, 65);
+  font-family: var(--serif); font-size: calc(2.083 * var(--u)); line-height: 1.2; color: #000;
   pointer-events: none; transition: color .4s ease-in-out; }
 .face-preview { z-index: 4; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .4s ease-in-out, visibility 0s .4s; }
 .face-preview img { width: 100%; height: 100%; object-fit: cover; }
 .face-preview.is-on { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity .4s ease-in-out; }
-.face-label.is-on { color: var(--black); }
+/* 原網站：平常是黑色，滑到作品上時文字變成灰色、旁邊出現作品圖 */
+.face-label.is-on { color: var(--muted); }
 .tile-grid { display: none; }
 
 /* ===== 作品頁 ===== */
