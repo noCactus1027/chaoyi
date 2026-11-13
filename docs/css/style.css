@@ -201,9 +201,10 @@ img.is-missing::after { content: "圖片待補：" attr(data-missing); position:
   .site-footer { position: static; padding: calc(25 * var(--m)) calc(21 * var(--m)) calc(20 * var(--m)); }
   .site-footer .copyright { font-size: calc(7 * var(--m)); color: #636363; }
 
-  /* 手機版：文字不浮出；名字標誌與選單按鈕第一次進站時從下方浮入 */
-  html.anim body [data-anim="right"]:not(.in) { opacity: 1; }
-  html.anim body [data-anim="right"].in { animation: none; }
+  /* 手機版：文字從下方浮入（原網站手機版設定）；About 的文字不播動畫 */
+  html.anim body [data-anim="right"].in { animation-name: float-in-bottom; }
+  html.anim body .about [data-anim="right"]:not(.in) { opacity: 1; }
+  html.anim body .about [data-anim="right"].in { animation: none; }
   html.intro-logo body .logo img, html.intro body .logo img, html.intro body .menu-toggle { animation: float-in-bottom 1.2s cubic-bezier(.445,.05,.55,.95) backwards; }
 }
 
