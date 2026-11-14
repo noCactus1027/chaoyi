@@ -34,7 +34,8 @@ a { color: inherit; }
    --edge 是螢幕比 1440px 寬時，兩側多出的空白 */
 /* 原網站的電腦版是固定尺寸，視窗變窄時不會縮小（右側超出的部分被裁掉），
    所以寬度 1100px 以上都用 1440px 設計稿的原始尺寸，只有更窄時才等比縮小 */
-:root { --u: min(1.3091vw, 14.4px); --edge: max(0px, (100vw - 1440px) / 2); --cedge: calc((100vw - 1440px) / 2); }
+/* --logo-bottom：名字標誌的下緣再往下留 12px，字卡與 About 文字不會超過這條線 */
+:root { --logo-bottom: calc(22.14 * var(--u) + 12px); --u: min(1.3091vw, 14.4px); --edge: max(0px, (100vw - 1440px) / 2); --cedge: calc((100vw - 1440px) / 2); }
 .frame { position: relative; max-width: 1440px; margin: 0 auto; }
 
 /* ===== 頁首 ===== */
@@ -78,12 +79,21 @@ a { color: inherit; }
 /* 左側基本資料：和原網站一樣是一張白色字卡，固定在畫面左下角（距離底部 20px），
    捲動時不會移動，作品圖片從字卡下方經過 */
 .project-info { position: fixed; z-index: 50; bottom: 20px; left: calc(5.2 * var(--u)); width: calc(34.58 * var(--u));
-  height: auto; max-height: calc(100vh - 40px); padding: calc(var(--cpt, 1.875) * var(--u)) 0 calc(4 * var(--u));
-  background: #fff; overflow-y: auto; scrollbar-width: none;
+  height: auto; padding: calc(var(--cpt, 1.875) * var(--u)) 0 calc(4 * var(--u));
+  /* 字卡最高只到「Chao-Yi Wang」標誌下方；放不下時字卡內可以單獨捲動 */
+  max-height: calc(100vh - 20px - var(--logo-bottom));
+  background: #fff; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #c8c8c8 transparent;
   display: flex; flex-direction: column; justify-content: flex-start; }
-@media (min-width: 821px) { .project-info[style*="--ch"] { height: calc(var(--ch) * var(--u)); } }
+@media (min-width: 821px) {
+  .project-info[style*="--ch"] { height: min(calc(var(--ch) * var(--u)), calc(100vh - 20px - var(--logo-bottom)));
+    /* 字卡被縮短時，先縮掉標題上方的留白（例如 Gua Sha），盡量不必捲動 */
+    padding-top: max(calc(1.875 * var(--u)), calc(var(--cpt, 1.875) * var(--u) - max(0px, calc(var(--ch) * var(--u) - (100vh - 20px - var(--logo-bottom))))));
+    padding-bottom: 16px; }
+}
 .project-info > * { flex-shrink: 0; }
-.project-info::-webkit-scrollbar { display: none; }
+.project-info::-webkit-scrollbar { width: 6px; }
+.project-info::-webkit-scrollbar-thumb { background: #c8c8c8; border-radius: 3px; }
+.project-info::-webkit-scrollbar-track { background: transparent; }
 /* 作品區跟著置中的版面移動（視窗比 1440 窄時往左移，和原網站一樣）；名字標誌和字卡則固定靠左 */
 .project-media { margin-left: calc(30.56 * var(--u) + min(0px, max(var(--cedge), -170px))); width: calc(74.31 * var(--u)); }
 /* 標題區塊高度和文字位置照原網站（區塊高 101px，標題文字距上 33px），下面的說明和基本資料才會在一樣的位置 */
@@ -160,7 +170,8 @@ img.is-missing::after { content: "圖片待補：" attr(data-missing); position:
 /* ===== About ===== */
 /* About（照原網站）：文字固定在左下角（底部距離 98px），照片固定在右側、垂直置中再往下 150px */
 .about { min-height: 100vh; }
-.about-text { position: fixed; z-index: 50; left: calc(5.28 * var(--u)); top: calc(100vh - 413px); width: calc(35 * var(--u)); }
+.about-text { position: fixed; z-index: 50; left: calc(5.28 * var(--u)); top: max(calc(100vh - 413px), var(--logo-bottom)); width: calc(35 * var(--u));
+  max-height: calc(100vh - 20px - max(calc(100vh - 413px), var(--logo-bottom))); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #c8c8c8 transparent; background: #fff; }
 .about-text h1 { font-family: var(--serif); font-weight: 450; font-size: 40px; letter-spacing: .05em; margin: 0; line-height: 58px; }
 .about-text p { margin: 0; }
 .about-image { position: fixed; z-index: 49; right: 84px; top: calc(50vh - 361px + 150px); width: calc(62.64 * var(--u)); margin: 0; }
@@ -257,7 +268,7 @@ img.is-missing::after { content: "圖片待補：" attr(data-missing); position:
 
   /* About：手機版只有文字 */
   .about { display: block; min-height: 0; padding: calc(20 * var(--m)) calc(20 * var(--m)) 0; }
-  .about-text { padding: 0; position: static; width: auto; }
+  .about-text { padding: 0; position: static; width: auto; max-height: none; overflow: visible; background: none; }
   .about-text h1 { line-height: 1.4; }
   .about-text h1 { font-size: calc(30 * var(--m)); margin: 0 0 calc(4 * var(--m)); }
   .about-text p { font-size: calc(14 * var(--m)); line-height: 1.6; }
@@ -282,7 +293,7 @@ html:lang(ko) .desc, html:lang(ko) .meta { word-break: keep-all; }
 /* 翻譯後文字長短不同：字卡與說明改成依內容調整高度（字卡仍貼齊視窗下方） */
 html:not([lang="en"]) .project-info .desc[style*="--dh"] { height: auto; }
 html:not([lang="en"]) .project-info h1 { white-space: normal; height: auto; min-height: 101px; padding-bottom: 8px; }
-@media (min-width: 821px) { html:not([lang="en"]) .project-info[style*="--ch"] { height: auto; min-height: calc(var(--ch) * var(--u)); } }
+@media (min-width: 821px) { html:not([lang="en"]) .project-info[style*="--ch"] { height: auto; min-height: min(calc(var(--ch) * var(--u)), calc(100vh - 20px - var(--logo-bottom))); } }
 
 .lang-switch { position: fixed; z-index: 60; top: 18px; right: 24px; font-size: 14px; }
 .lang-btn { display: flex; align-items: center; gap: 6px; background: none; border: 0; padding: 6px 2px; font: inherit; color: var(--ink); cursor: pointer; }
