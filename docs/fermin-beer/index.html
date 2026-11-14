@@ -8,10 +8,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400&family=Newsreader:opsz,wght@6..72,200..800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/style.css?v=202611131253">
+<link rel="stylesheet" href="../css/style.css?v=202611140832">
 <script>
   // 進場動畫：先把要浮出的元素藏起來，避免閃一下
   document.documentElement.classList.add('anim');
+  // 記住的語言：先設定 lang，讓字體一開始就正確
+  try { var L = new URLSearchParams(location.search).get('lang') || localStorage.getItem('cw-lang'); if (L) document.documentElement.lang = L; } catch (e) {}
   // 頁首浮出只在第一次進站時播放（同原網站）
   try { if (!sessionStorage.getItem('cw-intro')) { document.documentElement.classList.add('intro'); sessionStorage.setItem('cw-intro', '1'); } } catch (e) {}
 </script>
@@ -21,14 +23,18 @@
 <header class="site-header">
   <a class="logo" href="../index.html"><img src="../img/logo.avif" alt="Chao-Yi Wang 王昭怡"></a>
   <nav class="nav"><a href="../index.html" aria-current="page">Package Design</a><a href="../graphic-design/index.html">Graphic Design</a><a href="../about/index.html">About</a></nav>
+  <div class="lang-switch">
+    <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Language"><span class="lang-current">EN</span></button>
+    <ul class="lang-list"><li><button type="button" data-lang="en" lang="en">English</button></li><li><button type="button" data-lang="zh-Hant" lang="zh-Hant">繁體中文</button></li><li><button type="button" data-lang="ja" lang="ja">日本語</button></li><li><button type="button" data-lang="ko" lang="ko">한국어</button></li><li><button type="button" data-lang="es" lang="es">Español</button></li></ul>
+  </div>
   <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span class="mt-box"><span class="mt-l1"></span><span class="mt-l2"></span><span class="mt-l3"></span></span></button>
 </header>
-<div class="mobile-menu" id="mobile-menu"><div class="mm-overlay"></div><nav class="mm-panel" aria-label="Menu"><a href="../index.html" aria-current="page">Package Design</a><a href="../graphic-design/index.html">Graphic Design</a><a href="../about/index.html">About</a></nav></div>
+<div class="mobile-menu" id="mobile-menu"><div class="mm-overlay"></div><nav class="mm-panel" aria-label="Menu"><a href="../index.html" aria-current="page">Package Design</a><a href="../graphic-design/index.html">Graphic Design</a><a href="../about/index.html">About</a><div class="mm-lang"><button type="button" data-lang="en" lang="en">English</button><button type="button" data-lang="zh-Hant" lang="zh-Hant">繁體中文</button><button type="button" data-lang="ja" lang="ja">日本語</button><button type="button" data-lang="ko" lang="ko">한국어</button><button type="button" data-lang="es" lang="es">Español</button></div></nav></div>
 <main class="project">
   <aside class="project-info" style="--ch:33.542;--cpt:1.875;--mo:2;--mt:10;--mx:0;--mw:280;--mh:686;--mz:0;--mtitle:28;--msub:15;--mdesc:12">
-    <h1 data-anim="right">Fermin <small>/ Flavor Visualization /</small></h1>
-    <div class="desc" data-anim="right" style="--dw:32.50;--dmt:0.000;--dh:12.986;--mg:1.528"><p>Fermin Brewery is a craft beer brand based in Brooklyn, New York. The dazzling graphics symbolizes the fuzzy and floating feeling when one progresses from tipsy to drunk. Strong and vibrant colors separated from one light source portrays the alcohol infused visual. The bubbly shapes illustrate the chemical reaction of the ferment process. All together this creates a trippy psychedelic effect that gives the consumer&#x27;s mind a taste of this sparkly joy as an appetizer of the actual beer.</p></div>
-    <dl class="meta" style="--dmt:0.000;--dh:12.986;--mg:1.528"><div data-anim="right" style="--cw:13.12"><dt>Course /</dt><dd>DES-633-01<br>Prototyping and Production</dd></div><div data-anim="right" style="--cw:9.65"><dt>Category /</dt><dd>Rebranding &amp;<br>Package Redesign</dd></div><div data-anim="right" style="--cw:4.79"><dt>Year /</dt><dd>2019</dd></div><div data-anim="right"><dt>Professor /</dt><dd>Thomas Delany</dd></div></dl>
+    <h1 data-anim="right">Fermin <small>/ <span data-i18n="sub.Flavor Visualization">Flavor Visualization</span> /</small></h1>
+    <div class="desc" data-anim="right" data-i18n="desc.fermin-beer" style="--dw:32.50;--dmt:0.000;--dh:12.986;--mg:1.528"><p>Fermin Brewery is a craft beer brand based in Brooklyn, New York. The dazzling graphics symbolizes the fuzzy and floating feeling when one progresses from tipsy to drunk. Strong and vibrant colors separated from one light source portrays the alcohol infused visual. The bubbly shapes illustrate the chemical reaction of the ferment process. All together this creates a trippy psychedelic effect that gives the consumer&#x27;s mind a taste of this sparkly joy as an appetizer of the actual beer.</p></div>
+    <dl class="meta" style="--dmt:0.000;--dh:12.986;--mg:1.528"><div data-anim="right" style="--cw:13.12"><dt><span data-i18n="label.Course">Course</span> /</dt><dd>DES-633-01<br>Prototyping and Production</dd></div><div data-anim="right" style="--cw:9.65"><dt><span data-i18n="label.Category">Category</span> /</dt><dd data-i18n="cat.Rebranding &amp; Package Redesign">Rebranding &amp;<br>Package Redesign</dd></div><div data-anim="right" style="--cw:4.79"><dt><span data-i18n="label.Year">Year</span> /</dt><dd>2019</dd></div><div data-anim="right"><dt><span data-i18n="label.Professor">Professor</span> /</dt><dd>Thomas Delany</dd></div></dl>
   </aside>
   <section class="project-media">
     <div class="slideshow ss-plain" style="--mo:1;--mt:10;--mx:0;--mw:280;--mh:200;--mz:0;--dt:17.222;--dz:1;width:89.16%;margin-left:10.19%;--dar:954/686" data-count="5" data-interval="3000" data-duration="1000">
@@ -48,6 +54,7 @@
   <img alt="">
   <button class="lb-next" aria-label="Next image">›</button>
 </dialog>
-<script src="../js/main.js?v=202611131253"></script>
+<script src="../js/i18n.js?v=202611140832"></script>
+<script src="../js/main.js?v=202611140832"></script>
 </body>
 </html>

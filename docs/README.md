@@ -33,6 +33,14 @@
 
 原網站的 4 支影片都已放好（Wedding Invite、Drag Show、Gua Sha、Taiwan Pride），檔案都已壓縮成適合網頁的大小，放在 `video/` 資料夾。自動播放的影片預設靜音（瀏覽器規定），右下角有聲音開關。
 
+## 語言切換
+
+網站支援英文（原文）、繁體中文、日本語、한국어、Español。電腦版在右上角切換，手機版在選單裡切換；訪客選擇的語言會被記住，換頁後維持同一種語言。也可以在網址後面加上 `?lang=zh-Hant`、`?lang=ja`、`?lang=ko`、`?lang=es` 直接指定語言。
+
+不翻譯的部分：選單標題（Package Design、Graphic Design、About）、作品名稱、客戶／學校／教授名稱、課程名稱與編號、活動名稱和年份。
+
+翻譯內容都在 `js/i18n.js` 最上方的 `window.I18N_DATA` 裡，要修改譯文直接改那裡即可（英文原文則在各頁的 HTML 裡）。
+
 ## 修改內容
 
 - 文字：直接打開各頁的 `index.html`，用文字編輯器（推薦 VS Code）修改。

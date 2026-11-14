@@ -204,6 +204,10 @@ img.is-missing::after { content: "圖片待補：" attr(data-missing); position:
     transform: translateX(100%); transition: transform .4s cubic-bezier(.22,1,.36,1); }
   .menu-open .mm-panel { transform: none; }
   .mm-panel a { color: #2f2e2e; text-decoration: none; }
+  .lang-switch { display: none; }
+  .mm-panel .mm-lang { display: flex; flex-wrap: wrap; gap: calc(6 * var(--m)) calc(14 * var(--m)); margin-top: calc(24 * var(--m)); padding-top: calc(16 * var(--m)); border-top: 1px solid #ddd;
+    font-family: var(--sans); font-size: calc(13 * var(--m)); }
+  .mm-panel .mm-lang button { background: none; border: 0; padding: calc(4 * var(--m)) 0; font: inherit; color: #2f2e2e; cursor: pointer; }
   .menu-open { overflow: hidden; }
 
   /* 首頁與 Graphic Design：作品封面一張一張往下排 */
@@ -268,6 +272,29 @@ img.is-missing::after { content: "圖片待補：" attr(data-missing); position:
   html.anim body .about [data-anim="right"].in { animation: none; }
   html.intro-logo body .logo img, html.intro body .logo img, html.intro body .menu-toggle .mt-box { animation: float-in-bottom 1.2s cubic-bezier(.445,.05,.55,.95) backwards; }
 }
+
+/* ===== 語言切換 ===== */
+html:lang(zh-Hant) { --sans: "Neuzeit S", "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif; }
+html:lang(ja) { --sans: "Neuzeit S", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", sans-serif; }
+html:lang(ko) { --sans: "Neuzeit S", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+html:lang(zh-Hant) .desc, html:lang(ja) .desc, html:lang(ko) .desc { line-height: 1.65; }
+html:lang(ko) .desc, html:lang(ko) .meta { word-break: keep-all; }
+/* 翻譯後文字長短不同：字卡與說明改成依內容調整高度（字卡仍貼齊視窗下方） */
+html:not([lang="en"]) .project-info .desc[style*="--dh"] { height: auto; }
+html:not([lang="en"]) .project-info h1 { white-space: normal; height: auto; min-height: 101px; padding-bottom: 8px; }
+@media (min-width: 821px) { html:not([lang="en"]) .project-info[style*="--ch"] { height: auto; min-height: calc(var(--ch) * var(--u)); } }
+
+.lang-switch { position: fixed; z-index: 60; top: 18px; right: 24px; font-size: 14px; }
+.lang-btn { display: flex; align-items: center; gap: 6px; background: none; border: 0; padding: 6px 2px; font: inherit; color: var(--ink); cursor: pointer; }
+.lang-btn::after { content: ""; width: 6px; height: 6px; border: solid currentColor; border-width: 0 1.5px 1.5px 0; transform: translateY(-2px) rotate(45deg); transition: transform .2s; }
+.lang-switch.open .lang-btn::after { transform: translateY(1px) rotate(-135deg); }
+.lang-list { position: absolute; right: 0; top: 100%; margin: 4px 0 0; padding: 6px 0; list-style: none; background: #fff; border: 1px solid var(--ink); min-width: 120px;
+  opacity: 0; visibility: hidden; transform: translateY(-4px); transition: opacity .2s, transform .2s, visibility 0s .2s; }
+.lang-switch.open .lang-list { opacity: 1; visibility: visible; transform: none; transition: opacity .2s, transform .2s; }
+.lang-list button { display: block; width: 100%; text-align: left; background: none; border: 0; padding: 7px 14px; font: inherit; color: var(--ink); cursor: pointer; white-space: nowrap; }
+.lang-list button:hover, .lang-list button:focus-visible { background: #f2f2f0; }
+.lang-list button[aria-current="true"], .mm-lang button[aria-current="true"] { color: var(--muted); }
+.mm-lang { display: none; }
 
 /* ===== 動畫（同原網站設定） ===== */
 /* 文字與圖片浮出：FloatIn，1.2 秒；進入畫面時才播放 */
